@@ -7,7 +7,7 @@ import { properties } from "@/lib/data-utils";
 describe("PropertyDetailModal", () => {
   it("renders the open property's detail as an accessible dialog", () => {
     const property = properties[0];
-    render(<PropertyDetailModal slug={property.slug} onClose={() => {}} onNavigate={() => {}} />);
+    render(<PropertyDetailModal slug={property.slug} onClose={() => {}} />);
 
     const dialog = screen.getByRole("dialog");
     expect(dialog).toHaveAttribute("aria-modal", "true");
@@ -18,7 +18,7 @@ describe("PropertyDetailModal", () => {
   it("closes on Escape", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
-    render(<PropertyDetailModal slug={properties[0].slug} onClose={onClose} onNavigate={() => {}} />);
+    render(<PropertyDetailModal slug={properties[0].slug} onClose={onClose} />);
 
     await user.keyboard("{Escape}");
 
@@ -28,9 +28,7 @@ describe("PropertyDetailModal", () => {
   it("closes when the backdrop is clicked", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
-    const { container } = render(
-      <PropertyDetailModal slug={properties[0].slug} onClose={onClose} onNavigate={() => {}} />
-    );
+    const { container } = render(<PropertyDetailModal slug={properties[0].slug} onClose={onClose} />);
 
     const backdrop = container.querySelector('[class*="backdrop"]');
     expect(backdrop).not.toBeNull();
@@ -42,34 +40,17 @@ describe("PropertyDetailModal", () => {
   it("closes via the close button", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
-    render(<PropertyDetailModal slug={properties[0].slug} onClose={onClose} onNavigate={() => {}} />);
+    render(<PropertyDetailModal slug={properties[0].slug} onClose={onClose} />);
 
     await user.click(screen.getByRole("button", { name: "Close property details" }));
 
     expect(onClose).toHaveBeenCalled();
   });
 
-  it("steps to the adjacent property via prev/next", async () => {
-    const user = userEvent.setup();
-    const onNavigate = vi.fn();
-    render(<PropertyDetailModal slug={properties[1].slug} onClose={() => {}} onNavigate={onNavigate} />);
+  it("does not render any prev/next navigation controls", () => {
+    render(<PropertyDetailModal slug={properties[1].slug} onClose={() => {}} />);
 
-    await user.click(screen.getByRole("button", { name: new RegExp(`Next property: ${properties[2].name}`) }));
-    expect(onNavigate).toHaveBeenCalledWith(properties[2].slug);
-
-    await user.click(screen.getByRole("button", { name: new RegExp(`Previous property: ${properties[0].name}`) }));
-    expect(onNavigate).toHaveBeenCalledWith(properties[0].slug);
-  });
-
-  it("does not render a previous control for the first property or a next control for the last", () => {
-    const { rerender } = render(
-      <PropertyDetailModal slug={properties[0].slug} onClose={() => {}} onNavigate={() => {}} />
-    );
     expect(screen.queryByRole("button", { name: /^Previous property/ })).not.toBeInTheDocument();
-
-    rerender(
-      <PropertyDetailModal slug={properties[properties.length - 1].slug} onClose={() => {}} onNavigate={() => {}} />
-    );
     expect(screen.queryByRole("button", { name: /^Next property/ })).not.toBeInTheDocument();
   });
 });

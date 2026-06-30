@@ -25,15 +25,6 @@ function FeaturedPropertiesInner() {
     [router, pathname]
   );
 
-  // Prev/next inside the modal replaces the current history entry so a single
-  // back-button press still closes the modal regardless of how far someone navigated.
-  const handleNavigate = useCallback(
-    (slug: string) => {
-      router.replace(`${pathname}?property=${slug}`, { scroll: false });
-    },
-    [router, pathname]
-  );
-
   // Explicit close (Esc / backdrop / X) clears the query param directly rather
   // than relying on router.back(), which would be wrong for a property opened
   // via a shared deep link with no in-app history to return to.
@@ -72,12 +63,7 @@ function FeaturedPropertiesInner() {
 
       <AnimatePresence>
         {activeSlug && (
-          <PropertyDetailModal
-            key="property-detail-modal"
-            slug={activeSlug}
-            onClose={handleClose}
-            onNavigate={handleNavigate}
-          />
+          <PropertyDetailModal key="property-detail-modal" slug={activeSlug} onClose={handleClose} />
         )}
       </AnimatePresence>
     </section>

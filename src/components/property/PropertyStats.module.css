@@ -1,11 +1,24 @@
 .stats {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding-block: 16px;
+  gap: 1vw;
+  padding-block: 1.2vw;
+  /* StatChip has no font-size of its own - it inherits this, which is what
+     lets its text and icons (sized in em) scale fluidly with the modal. */
+  font-size: 0.9vw;
+  /* Hairline border stays a fixed 1px regardless of viewport - scaling a
+     border this thin with everything else just makes it look blurry. */
   border-block: 1px solid rgba(26, 26, 26, 0.08);
 }
 
 .divider {
   color: rgba(26, 26, 26, 0.12);
+}
+
+@media (max-width: 860px) {
+  .stats {
+    gap: 3vw;
+    padding-block: 3vw;
+    font-size: 3.2vw;
+  }
 }
