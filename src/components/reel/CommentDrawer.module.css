@@ -3,6 +3,10 @@
   inset: 0;
   z-index: 10;
   background: rgba(0, 0, 0, 0.4);
+  /* Matches the screen's own clip radius (ReelStage.module.css .screen) for the
+     same reason as .sheet below - this element animates too (opacity fade) and
+     can't rely on the ancestor's clip reliably reaching it while doing so. */
+  border-radius: 20px;
 }
 
 .sheet {
@@ -11,10 +15,12 @@
   bottom: 0;
   z-index: 20;
   background: white;
-  /* No bottom radius here - the screen's own clip (ReelStage.module.css .screen,
-     overflow:hidden + border-radius:20px) rounds the bottom corners for us, so
-     there's only one rounded edge to keep in sync instead of two. */
-  border-radius: 18px 18px 0 0;
+  /* Rounds its own bottom corners (matching the screen's clip radius in
+     ReelStage.module.css .screen) instead of relying solely on that ancestor
+     clip - while this element is animating in/out (transform: translateY),
+     the ancestor's rounded clip doesn't reliably apply to it, which showed
+     square corners mid-slide. */
+  border-radius: 18px 18px 20px 20px;
   overflow: hidden;
 }
 
