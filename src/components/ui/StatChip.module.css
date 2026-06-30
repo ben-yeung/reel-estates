@@ -1,0 +1,16 @@
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.light {
+  color: rgba(255, 255, 255, 0.92);
+}

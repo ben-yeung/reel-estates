@@ -1,0 +1,13 @@
+.wrapper {
+  position: relative;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #3d3228 0%, #6b5841 35%, #9a7d5f 70%, #b89a7a 100%);
+}
+
+.image {
+  object-fit: cover;
+}

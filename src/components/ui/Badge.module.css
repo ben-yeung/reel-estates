@@ -1,0 +1,19 @@
+.badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: white;
+}
+
+.warm {
+  background: var(--warm);
+}
+
+.dark {
+  background: var(--text);
+}

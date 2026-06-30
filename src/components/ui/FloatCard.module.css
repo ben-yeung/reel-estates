@@ -1,0 +1,9 @@
+.card {
+  border-radius: 18px;
+  padding: 20px;
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}

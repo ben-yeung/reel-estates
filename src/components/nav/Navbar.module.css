@@ -1,0 +1,68 @@
+.nav {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid transparent;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--warm);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.link {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition-property: color;
+  transition-timing-function: ease;
+}
+
+.cta {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  background: var(--warm);
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cta:hover {
+  background: var(--warm-dark);
+}

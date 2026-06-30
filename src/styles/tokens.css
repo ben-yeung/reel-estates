@@ -1,0 +1,22 @@
+:root {
+  /* Color */
+  --warm: #b89a7a;
+  --warm-dark: #9a7d5f;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --bg: #f5f2ee;
+  --card-bg: rgba(255, 255, 255, 0.88);
+
+  /* Type */
+  --font-heading: var(--font-montserrat), sans-serif;
+  --font-body: var(--font-source-sans), sans-serif;
+
+  /* Frosted glass recipe — shared blur/border/shadow.
+     Background opacity varies by surface: navbar island uses --glass-bg (0.52),
+     floating cards use --card-bg (0.88). */
+  --glass-bg: rgba(255, 255, 255, 0.52);
+  --glass-blur: blur(32px) saturate(180%);
+  --glass-border: 1px solid rgba(220, 215, 210, 0.5);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
