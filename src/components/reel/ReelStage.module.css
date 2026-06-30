@@ -27,6 +27,12 @@
   border-radius: 20px;
   overflow: hidden;
   background: #111;
+  /* Without this, the rounded edge is only visible by contrast with whatever's
+     inside the screen - against a dark reel photo that's plenty, but against
+     the comment sheet's white it nearly vanishes into the bezel's near-white
+     glass background, making the corner read as flat/square instead of
+     rounded. A faint border keeps the curve visible regardless of content. */
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .hint {
