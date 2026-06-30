@@ -3,9 +3,6 @@
   inset: 0;
   z-index: 10;
   background: rgba(0, 0, 0, 0.4);
-  /* Matches the screen's own clip radius (ReelStage.module.css .screen) so this
-     full-bleed layer doesn't show a sharp corner past the sheet's rounded one. */
-  border-radius: 20px;
 }
 
 .sheet {
@@ -14,9 +11,10 @@
   bottom: 0;
   z-index: 20;
   background: white;
-  /* Bottom corners match the screen's own clip radius so the sheet sits flush
-     against the device edge. */
-  border-radius: 18px 18px 20px 20px;
+  /* No bottom radius here - the screen's own clip (ReelStage.module.css .screen,
+     overflow:hidden + border-radius:20px) rounds the bottom corners for us, so
+     there's only one rounded edge to keep in sync instead of two. */
+  border-radius: 18px 18px 0 0;
   overflow: hidden;
 }
 
