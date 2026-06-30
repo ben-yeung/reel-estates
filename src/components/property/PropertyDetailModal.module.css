@@ -1,0 +1,157 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 16, 12, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  margin: auto;
+  width: min(1200px, calc(100vw - 64px));
+  max-height: min(88vh, 880px);
+  overflow-y: auto;
+  border-radius: 22px;
+  padding: 40px;
+  /* Solid, not glass: this panel carries dense reading content (description,
+     stats, agent details), so it stays opaque for legibility rather than
+     using the frosted-glass recipe the rest of the site uses for floating
+     cards over imagery. */
+  background: white;
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  outline: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(26, 26, 26, 0.06);
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(26, 26, 26, 0.12);
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  /* Sits over the dimmed page backdrop, not the panel's own surface, so it
+     needs real contrast of its own rather than the subtle tint closeButton
+     can get away with against the white panel. */
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navButton:hover {
+  background: var(--bg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+}
+
+/* Inset rather than floating outside the panel edge: .panel sets
+   overflow-y: auto, which per the CSS overflow spec forces overflow-x to
+   also compute as auto (not visible), clipping anything positioned outside
+   the panel's own box. Floating arrows would be silently cut off. */
+.navPrev {
+  left: 16px;
+}
+
+.navNext {
+  right: 16px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+.left {
+  min-width: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 12px;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.location {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .panel {
+    width: calc(100vw - 24px);
+    max-height: 92vh;
+    padding: 24px;
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .navPrev {
+    left: 8px;
+  }
+
+  .navNext {
+    right: 8px;
+  }
+}

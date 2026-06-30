@@ -1,0 +1,11 @@
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-block: 16px;
+  border-block: 1px solid rgba(26, 26, 26, 0.08);
+}
+
+.divider {
+  color: rgba(26, 26, 26, 0.12);
+}
