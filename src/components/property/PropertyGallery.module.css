@@ -19,6 +19,9 @@
   min-height: 0;
   border-radius: 1.2vw;
   overflow: hidden;
+  /* Let a vertical page/modal scroll pass through while a horizontal swipe
+     drives the gallery on touch. */
+  touch-action: pan-y;
 }
 
 .heroImage {
@@ -95,8 +98,14 @@
 }
 
 /* Overlaid prev/next controls - hidden on desktop, where the thumbnail strip is
-   the picker. Revealed on mobile below. */
+   the picker. Revealed on the mobile-gallery layout (<=860) below, then hidden
+   again on phones (<=640) where a swipe + dots take over. */
 .arrow {
+  display: none;
+}
+
+/* Pagination dots for the gallery - phone only (swipe is the gesture there). */
+.galleryDots {
   display: none;
 }
 
@@ -158,5 +167,17 @@
 
   .arrowNext {
     right: 3vw;
+  }
+}
+
+/* Phone: swap the overlay arrows for a swipe + pagination dots. */
+@media (max-width: 640px) {
+  .arrow {
+    display: none;
+  }
+
+  .galleryDots {
+    display: flex;
+    margin-top: 3vw;
   }
 }

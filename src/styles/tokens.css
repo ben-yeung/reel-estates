@@ -14,7 +14,11 @@
   /* Global UI scale. One knob to grow/shrink the whole interface while keeping
      every ratio fixed: it multiplies the fluid root font-size (globals.css), so
      all rem-based sizing scales with it, and the title clamps multiply their px
-     floor + vw term by it so headings stay on the same scale. */
+     floor + vw term by it so headings stay on the same scale.
+     Stepped down per breakpoint (below) so the whole rem-based UI shrinks
+     proportionally on smaller screens - the primary mobile-sizing lever, so
+     per-section media queries are reserved for genuine layout changes. The
+     canonical breakpoints are phone <= 640px and tablet <= 1024px. See ADR 0008. */
   --scale: 1.5;
 
   /* Frosted glass recipe — shared blur/border/shadow.
@@ -25,4 +29,18 @@
   --glass-border: 1px solid rgba(220, 215, 210, 0.5);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* Tablet: dial the whole interface down a step. */
+@media (max-width: 1024px) {
+  :root {
+    --scale: 1.2;
+  }
+}
+
+/* Phone: 16px root (was a flat 24px), everything rem-based shrinks with it. */
+@media (max-width: 640px) {
+  :root {
+    --scale: 1;
+  }
 }

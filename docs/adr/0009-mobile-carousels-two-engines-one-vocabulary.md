@@ -11,3 +11,5 @@ We deliberately did not extract a single shared engine: the Locations component 
 The two engines therefore coexist on purpose; what is shared is the *vocabulary*, not the implementation - a single windowed-dots component (bound to each carousel's real, modulo-N index) and the same sizing/peek/arrow rules give them a consistent feel despite the different internals.
 
 The known cost of the scroll-snap clone-and-recenter loop is a possible seam flicker on very fast flicks; the recenter is debounced to the scroll-settle event and jumps without animation to keep it invisible in normal use.
+
+The Property Detail Modal's image gallery adopts the same vocabulary on phone - swipe plus the shared windowed-dots component, with its overlay arrows shown only on tablet - so "swipe a track of cards/images, watch the dots" is the single consistent gesture everywhere on the site, even though the gallery is not itself a Card Carousel.

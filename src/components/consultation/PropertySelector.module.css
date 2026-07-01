@@ -102,3 +102,11 @@
     max-height: 22rem;
   }
 }
+
+/* Phone wizard: the selector is a full step of its own, so let the list breathe
+   to most of the viewport height instead of the compact desktop-panel cap. */
+@media (max-width: 640px) {
+  .list {
+    max-height: 60vh;
+  }
+}
