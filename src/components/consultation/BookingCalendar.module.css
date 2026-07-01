@@ -1,0 +1,89 @@
+.calendar {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.nav {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.nav:hover:not(:disabled) {
+  border-color: var(--warm);
+  background: rgba(184, 154, 122, 0.1);
+}
+
+.nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.weekdays,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding-bottom: 0.25rem;
+}
+
+.blank {
+  aspect-ratio: 1;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.day:hover:not(:disabled) {
+  background: rgba(184, 154, 122, 0.14);
+}
+
+.day:disabled {
+  color: rgba(26, 26, 26, 0.22);
+  cursor: default;
+}
+
+.daySelected,
+.daySelected:hover {
+  background: var(--warm);
+  color: #fff;
+}

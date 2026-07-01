@@ -1,0 +1,233 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: rgba(184, 154, 122, 0.1);
+  border-radius: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.chipAvatar {
+  position: relative;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.chipAvatarImg {
+  position: absolute;
+  inset: 0;
+}
+
+.chipText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.chipLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-dark);
+}
+
+.chipName {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.chipTitle {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem 0.4rem 0.55rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  border-radius: 2rem;
+  background: #fff;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.back:hover {
+  border-color: var(--warm);
+  background: rgba(184, 154, 122, 0.08);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 1.5rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.times {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timesLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+
+.slot {
+  width: 100%;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+  border-radius: 0.6rem;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.slot:hover {
+  border-color: var(--warm);
+}
+
+.slotSelected,
+.slotSelected:hover {
+  background: var(--warm);
+  border-color: var(--warm);
+  color: #fff;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.input {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+  border-radius: 0.6rem;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--warm);
+}
+
+.confirm {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: var(--warm);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.confirm:hover:not(:disabled) {
+  background: var(--warm-dark);
+}
+
+.confirm:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.success {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.successIcon {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: rgba(184, 154, 122, 0.16);
+  color: var(--warm-dark);
+  margin-bottom: 1rem;
+}
+
+.successTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.successText {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 22rem;
+}
+
+.successText strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* On narrow panels the info/times columns stack. */
+@media (max-width: 860px) {
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+}
