@@ -18,34 +18,34 @@
 
 .info {
   position: absolute;
-  left: 16px;
-  right: 56px;
-  bottom: 56px;
+  left: 1rem;
+  right: 3.5rem;
+  bottom: 3.5rem;
 }
 
 .name {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: white;
   line-height: 1.25;
-  margin-bottom: 2px;
+  margin-bottom: 0.125rem;
 }
 
 .location {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .hashtags {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   color: var(--warm);
 }
 
 .actionRail {
   position: absolute;
-  right: 10px;
-  bottom: 48px;
+  right: 0.625rem;
+  bottom: 3rem;
 }

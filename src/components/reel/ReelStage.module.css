@@ -1,10 +1,15 @@
 .stage {
   position: relative;
-  width: clamp(240px, 28vw, 300px);
-  aspect-ratio: 1 / 2;
+  aspect-ratio: 1 / 1.9;
+  /* Height-driven so the portrait phone always fits the section's viewport
+     height (100vh minus the ~12rem of padding-block, plus room for the hint),
+     rather than overflowing. Width follows from the aspect ratio. Caps at the
+     design height (37.5rem, which scales with --scale) on tall screens. */
+  height: min(calc(100vh - 14rem), 37.5rem);
+  width: auto;
   margin-inline: auto;
-  border-radius: 28px;
-  padding: 10px;
+  border-radius: 1.75rem;
+  padding: 0.625rem;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -24,24 +29,33 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   overflow: hidden;
   background: #111;
+  /* Without this, the rounded edge is only visible by contrast with whatever's
+     inside the screen - against a dark reel photo that's plenty, but against
+     the comment sheet's white it nearly vanishes into the bezel's near-white
+     glass background, making the corner read as flat/square instead of
+     rounded. A faint border keeps the curve visible regardless of content. */
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .hint {
   position: absolute;
   left: 50%;
-  bottom: -28px;
+  bottom: -1.75rem;
   transform: translateX(-50%);
   white-space: nowrap;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--muted);
 }
 
 @media (max-width: 768px) {
   .stage {
+    /* Stacked layout - the phone is width-constrained, not height-constrained,
+       so drive it from width and let the aspect ratio set the height. */
+    height: auto;
     width: clamp(220px, 60vw, 320px);
   }
 }

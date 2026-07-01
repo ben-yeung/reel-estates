@@ -7,6 +7,12 @@
 }
 
 html {
+  /* Fluid root: everything sized in rem scales from this single knob.
+     max(16px, 0.8333vw) is flat at 16px up to 1920px (crossover: 16/1920*100),
+     then grows with the viewport on 2K/4K - lower bound only, so there is
+     deliberately no upper cap. The whole thing is multiplied by --scale to
+     size the entire UI up or down without touching any ratios. */
+  font-size: calc(max(16px, 0.8333vw) * var(--scale));
   scroll-behavior: smooth;
 }
 

@@ -1,6 +1,6 @@
 .card {
-  border-radius: 18px;
-  padding: 20px;
+  border-radius: 1.125rem;
+  padding: 1.25rem;
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);

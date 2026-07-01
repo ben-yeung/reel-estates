@@ -3,9 +3,10 @@
   inset: 0;
   z-index: 10;
   background: rgba(0, 0, 0, 0.4);
-  /* Matches the screen's own clip radius (ReelStage.module.css .screen) so this
-     full-bleed layer doesn't show a sharp corner past the sheet's rounded one. */
-  border-radius: 20px;
+  /* Matches the screen's own clip radius (ReelStage.module.css .screen) for the
+     same reason as .sheet below - this element animates too (opacity fade) and
+     can't rely on the ancestor's clip reliably reaching it while doing so. */
+  border-radius: 1.25rem;
 }
 
 .sheet {
@@ -14,9 +15,12 @@
   bottom: 0;
   z-index: 20;
   background: white;
-  /* Bottom corners match the screen's own clip radius so the sheet sits flush
-     against the device edge. */
-  border-radius: 18px 18px 20px 20px;
+  /* Rounds its own bottom corners (matching the screen's clip radius in
+     ReelStage.module.css .screen) instead of relying solely on that ancestor
+     clip - while this element is animating in/out (transform: translateY),
+     the ancestor's rounded clip doesn't reliably apply to it, which showed
+     square corners mid-slide. */
+  border-radius: 1.125rem 1.125rem 1.25rem 1.25rem;
   overflow: hidden;
 }
 
@@ -24,13 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .headerTitle {
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   color: var(--text);
 }
@@ -38,7 +42,7 @@
 .closeButton {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1;
   color: var(--muted);
   cursor: pointer;
@@ -47,11 +51,11 @@
 
 .list {
   overflow-y: auto;
-  max-height: 190px;
-  padding: 8px 16px 16px;
+  max-height: 11.875rem;
+  padding: 0.5rem 1rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.75rem;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* legacy Edge/IE */
 }
@@ -62,12 +66,12 @@
 
 .comment {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .avatar {
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
   flex-shrink: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--warm-dark), var(--text));
@@ -75,19 +79,19 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 700;
 }
 
 .author {
   font-family: var(--font-heading);
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
   color: var(--text);
 }
 
 .text {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--muted);
-  margin-top: 2px;
+  margin-top: 0.125rem;
 }

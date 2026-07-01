@@ -28,13 +28,13 @@ export default function Navbar() {
       className={styles.nav}
       style={{
         backdropFilter: isScrolled ? "blur(32px) saturate(180%)" : "blur(0px)",
-        paddingLeft: isScrolled ? "24px" : "40px",
-        paddingRight: isScrolled ? "24px" : "40px",
+        paddingLeft: isScrolled ? "1.5rem" : "2.5rem",
+        paddingRight: isScrolled ? "1.5rem" : "2.5rem",
       }}
     >
       <Link href="/" className={styles.logoLink}>
         <div className={styles.logoMark}>
-          <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+          <svg width="1rem" height="1rem" viewBox="0 0 18 18" fill="none">
             <rect x="2" y="10" width="4" height="6" rx="1" fill="white" />
             <rect x="7" y="6" width="4" height="10" rx="1" fill="white" />
             <rect x="12" y="2" width="4" height="14" rx="1" fill="white" />
