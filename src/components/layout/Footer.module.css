@@ -17,6 +17,12 @@
   gap: 0.625rem;
 }
 
+.brandTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .wordmark {
   font-family: var(--font-heading);
   font-size: 1.25rem;

@@ -3,6 +3,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
 import { navVariants, navColorTransitionMs } from "@/lib/motion";
+import LogoGlyph from "@/components/brand/LogoGlyph";
 import styles from "./Navbar.module.css";
 
 const links = [
@@ -28,18 +29,13 @@ export default function Navbar() {
       className={styles.nav}
       style={{
         backdropFilter: isScrolled ? "blur(32px) saturate(180%)" : "blur(0px)",
-        paddingLeft: isScrolled ? "1.5rem" : "2.5rem",
-        paddingRight: isScrolled ? "1.5rem" : "2.5rem",
+        paddingLeft: isScrolled ? "0.875rem" : "2.5rem",
+        paddingRight: isScrolled ? "0.875rem" : "2.5rem",
       }}
     >
       <Link href="/" className={styles.logoLink}>
         <div className={styles.logoMark}>
-          <svg width="1rem" height="1rem" viewBox="0 0 18 18" fill="none">
-            <rect x="2" y="10" width="4" height="6" rx="1" fill="white" />
-            <rect x="7" y="6" width="4" height="10" rx="1" fill="white" />
-            <rect x="12" y="2" width="4" height="14" rx="1" fill="white" />
-            <path d="M2 9 L16 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
+          <LogoGlyph />
         </div>
         <motion.span
           className={styles.logoText}
