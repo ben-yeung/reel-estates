@@ -14,6 +14,7 @@ import {
   type PanInfo,
 } from "framer-motion";
 import { PropertyImage } from "@/components/ui/PropertyImage";
+import { WindowedDots } from "@/components/ui/WindowedDots";
 import { spotlights, getSpotlightLikes, formatLikes } from "@/lib/data-utils";
 import styles from "./Locations.module.css";
 
@@ -68,6 +69,19 @@ export default function Locations() {
   const move = useCallback(
     (delta: number) => setIdx(indexRef.current + delta),
     [setIdx],
+  );
+
+  // Jump to a real destination index by the shortest wrapped path, so the dots
+  // never spring the long way around the loop.
+  const goToReal = useCallback(
+    (j: number) => {
+      const real = ((indexRef.current % N) + N) % N;
+      let delta = j - real;
+      if (delta > N / 2) delta -= N;
+      if (delta < -N / 2) delta += N;
+      move(delta);
+    },
+    [move],
   );
 
   // Position on mount before paint.
@@ -228,6 +242,14 @@ export default function Locations() {
           </svg>
         </button>
       </div>
+
+      <WindowedDots
+        count={N}
+        active={((index % N) + N) % N}
+        onSelect={goToReal}
+        label="Destinations pagination"
+        className={styles.dots}
+      />
     </section>
   );
 }

@@ -1,0 +1,49 @@
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(26, 26, 26, 0.22);
+  cursor: pointer;
+  /* Grow the tap target past the visible dot without affecting layout. */
+  position: relative;
+  transition: background-color 0.2s ease, width 0.2s ease, height 0.2s ease, transform 0.2s ease;
+}
+
+/* A generous invisible hit area so the small dots are still easy to tap. */
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: -0.6rem;
+}
+
+.dot:hover {
+  background: rgba(26, 26, 26, 0.4);
+}
+
+.active {
+  width: 1.4rem;
+  background: var(--warm);
+}
+
+.active:hover {
+  background: var(--warm-dark);
+}
+
+/* Windowed shrink levels for the dots nearest an edge with more beyond it. */
+.small {
+  transform: scale(0.72);
+}
+
+.smallest {
+  transform: scale(0.48);
+}

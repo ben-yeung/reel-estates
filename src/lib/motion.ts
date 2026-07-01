@@ -98,6 +98,43 @@ export const navVariants: Variants = {
   },
 };
 
+// Mobile nav geometry is near-full-width with small fixed gutters at every scroll
+// position, so the morph is subtle - only the frost/border/shadow fade in as you
+// scroll (or when the Nav Sheet opens). See ADR 0009 / the mobile plan.
+export const navVariantsMobile: Variants = {
+  top: {
+    top: "0.75rem",
+    left: "0.75rem",
+    right: "0.75rem",
+    borderRadius: "0.875rem",
+    height: "3.5rem",
+    backgroundColor: "rgba(255,255,255,0)",
+    borderColor: "rgba(220,215,210,0)",
+    boxShadow: "0 0px 0px rgba(0,0,0,0)",
+    transition: {
+      backgroundColor: { duration: 0.25, ease: "easeOut" },
+      borderColor: { duration: 0.25, ease: "easeOut" },
+      boxShadow: { duration: 0.25, ease: "easeOut" },
+    },
+  },
+  island: {
+    top: "0.75rem",
+    left: "0.75rem",
+    right: "0.75rem",
+    borderRadius: "0.875rem",
+    height: "3.5rem",
+    backgroundColor: "rgba(255,255,255,0.72)",
+    borderColor: "rgba(220,215,210,0.5)",
+    boxShadow:
+      "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.55)",
+    transition: {
+      backgroundColor: { duration: 0.3, ease: "easeOut" },
+      borderColor: { duration: 0.3, ease: "easeOut" },
+      boxShadow: { duration: 0.3, ease: "easeOut" },
+    },
+  },
+};
+
 export const navColorTransitionMs = 550;
 
 export const reelPreviewCopy: { container: Variants; item: Variants } = {

@@ -6,6 +6,7 @@ import { PropertySelector } from "@/components/consultation/PropertySelector";
 import { BookingPanel } from "@/components/consultation/BookingPanel";
 import { LEAD_AGENT_SLUG } from "@/components/consultation/booking";
 import { getAgentBySlug, getPropertyBySlug, properties } from "@/lib/data-utils";
+import { useIsPhone } from "@/lib/useMediaQuery";
 import styles from "./ConsultationBooking.module.css";
 
 function ConsultationBookingInner() {
@@ -14,8 +15,16 @@ function ConsultationBookingInner() {
   // the modal's `?property=`, which would re-open the modal). See docs/adr/0006.
   const bookParam = searchParams.get("book");
 
+  const isPhone = useIsPhone();
+
   const [selectedSlug, setSelectedSlug] = useState<string | null>(() =>
     bookParam && getPropertyBySlug(bookParam) ? bookParam : null
+  );
+
+  // On phone the booking is a single-panel wizard: Select -> Date -> Details.
+  // A valid deep link enters straight at the Date step. See ADR 0010.
+  const [phase, setPhase] = useState<"select" | "book">(() =>
+    bookParam && getPropertyBySlug(bookParam) ? "book" : "select"
   );
 
   // Sync to a deep link that arrives while the section is already mounted (e.g. a
@@ -27,7 +36,15 @@ function ConsultationBookingInner() {
     setLastBookParam(bookParam);
     if (bookParam && getPropertyBySlug(bookParam)) {
       setSelectedSlug(bookParam);
+      setPhase("book");
     }
+  }
+
+  // Selecting a property (or general enquiry) advances the phone wizard to the
+  // Date step; on desktop both panels are always visible so phase is inert.
+  function handleSelect(slug: string | null) {
+    setSelectedSlug(slug);
+    setPhase("book");
   }
 
   // When a `?book=` deep link arrives (external link, or the modal's "Book
@@ -67,20 +84,45 @@ function ConsultationBookingInner() {
           <h2 className={styles.title}>Book a Consultation</h2>
         </motion.div>
 
-        <div className={styles.card}>
-          <div className={styles.left}>
-            <PropertySelector
-              properties={properties}
-              selectedSlug={selectedSlug}
-              onSelect={setSelectedSlug}
-            />
-          </div>
-          <div className={styles.right}>
-            {agent && (
-              <BookingPanel agent={agent} selectionKey={selectedSlug ?? "__general__"} />
+        {isPhone ? (
+          <div className={`${styles.card} ${styles.cardWizard}`}>
+            {phase === "select" ? (
+              <div className={styles.step}>
+                <PropertySelector
+                  properties={properties}
+                  selectedSlug={selectedSlug}
+                  onSelect={handleSelect}
+                />
+              </div>
+            ) : (
+              agent && (
+                <div className={styles.step}>
+                  <BookingPanel
+                    agent={agent}
+                    selectionKey={selectedSlug ?? "__general__"}
+                    onBack={() => setPhase("select")}
+                    backLabel={property ? property.name : "General enquiry"}
+                  />
+                </div>
+              )
             )}
           </div>
-        </div>
+        ) : (
+          <div className={styles.card}>
+            <div className={styles.left}>
+              <PropertySelector
+                properties={properties}
+                selectedSlug={selectedSlug}
+                onSelect={setSelectedSlug}
+              />
+            </div>
+            <div className={styles.right}>
+              {agent && (
+                <BookingPanel agent={agent} selectionKey={selectedSlug ?? "__general__"} />
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

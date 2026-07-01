@@ -52,6 +52,16 @@
   padding: 2rem;
 }
 
+/* Phone wizard: a single panel that shows one step at a time (Select -> Date ->
+   Details), so nothing stacks and each step owns the screen. See ADR 0010. */
+.cardWizard {
+  display: block;
+}
+
+.step {
+  padding: 1.5rem;
+}
+
 @media (max-width: 860px) {
   .section {
     padding-block: 4rem;

@@ -4,7 +4,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { PropertyDetailModal } from "@/components/property/PropertyDetailModal";
+import { SnapCarousel } from "@/components/ui/SnapCarousel";
 import { properties } from "@/lib/data-utils";
+import { useIsMobile } from "@/lib/useMediaQuery";
 import { reelPreviewCopy } from "@/lib/motion";
 import styles from "./FeaturedProperties.module.css";
 
@@ -17,6 +19,7 @@ function FeaturedPropertiesInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const activeSlug = searchParams.get("property");
+  const isMobile = useIsMobile();
 
   const handleOpen = useCallback(
     (slug: string) => {
@@ -57,19 +60,27 @@ function FeaturedPropertiesInner() {
           <h2 className={styles.title}>Our Properties</h2>
         </motion.div>
 
-        <motion.div
-          variants={reelPreviewCopy.container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className={styles.grid}
-        >
-          {orderedProperties.map((property) => (
-            <motion.div key={property.slug} variants={reelPreviewCopy.item}>
-              <PropertyCard property={property} onOpen={handleOpen} />
-            </motion.div>
-          ))}
-        </motion.div>
+        {isMobile ? (
+          <SnapCarousel label="Featured properties">
+            {orderedProperties.map((property) => (
+              <PropertyCard key={property.slug} property={property} onOpen={handleOpen} />
+            ))}
+          </SnapCarousel>
+        ) : (
+          <motion.div
+            variants={reelPreviewCopy.container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className={styles.grid}
+          >
+            {orderedProperties.map((property) => (
+              <motion.div key={property.slug} variants={reelPreviewCopy.item}>
+                <PropertyCard property={property} onOpen={handleOpen} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       <AnimatePresence>

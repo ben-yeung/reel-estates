@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import { PropertyImage } from "@/components/ui/PropertyImage";
+import { WindowedDots } from "@/components/ui/WindowedDots";
+import { useIsMobile } from "@/lib/useMediaQuery";
 import { EASE_STANDARD } from "@/lib/motion";
 import styles from "./PropertyGallery.module.css";
 
@@ -20,9 +22,17 @@ export function PropertyGallery({
   // block by property slug, so this component fully remounts (fresh `active`
   // state) on every prev/next step rather than receiving new `images` in place.
   const [active, setActive] = useState(0);
+  const isMobile = useIsMobile();
 
   const showPrev = () => setActive((i) => (i - 1 + images.length) % images.length);
   const showNext = () => setActive((i) => (i + 1) % images.length);
+
+  // Swipe the gallery on touch: a horizontal drag past a small threshold (or a
+  // quick flick) steps the image, looping like the arrows.
+  function handleDragEnd(_event: unknown, info: PanInfo) {
+    if (info.offset.x <= -40 || info.velocity.x < -400) showNext();
+    else if (info.offset.x >= 40 || info.velocity.x > 400) showPrev();
+  }
 
   // Left/Right cycles gallery images (looped). This component only exists while
   // the detail modal is open, so the listener is implicitly scoped to that
@@ -40,9 +50,17 @@ export function PropertyGallery({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [images.length]);
 
+  const canSwipe = isMobile && images.length > 1;
+
   return (
     <div className={styles.gallery}>
-      <div className={styles.hero}>
+      <motion.div
+        className={styles.hero}
+        drag={canSwipe ? "x" : false}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.15}
+        onDragEnd={handleDragEnd}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -83,7 +101,17 @@ export function PropertyGallery({
             </button>
           </>
         )}
-      </div>
+      </motion.div>
+
+      {images.length > 1 && (
+        <WindowedDots
+          count={images.length}
+          active={active}
+          onSelect={setActive}
+          label="Gallery pagination"
+          className={styles.galleryDots}
+        />
+      )}
 
       {/* Name/location and the thumbnail picker share one row to save vertical
           space: caption stacked on the left, thumbnails right-aligned and

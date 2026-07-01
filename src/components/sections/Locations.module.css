@@ -215,6 +215,31 @@
   transform: translateY(-50%) translateX(2px);
 }
 
+/* Pagination dots, centred under the carousel - the shared vocabulary across
+   all carousels (see ADR 0009). Sits within the section's flex column. */
+.dots {
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+/* Phone: a swipe is the gesture, so drop the side arrows and lean on the dots. */
+@media (max-width: 640px) {
+  .arrow {
+    display: none;
+  }
+}
+
+/* Mobile/tablet: the full-height centred layout leaves a large dead gap below the
+   dots, so size the section to its content instead of the viewport height. */
+@media (max-width: 1024px) {
+  .section {
+    min-height: auto;
+    justify-content: flex-start;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card {
     transition: none;
