@@ -22,7 +22,7 @@
    to the phone at any viewport height. */
 .tabs {
   position: absolute;
-  top: 3.5cqw;
+  top: 5.5cqw;
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
