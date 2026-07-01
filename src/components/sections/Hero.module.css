@@ -8,7 +8,14 @@
 
 .bgWrapper {
   position: absolute;
-  inset: 0;
+  /* Oversized vertically and centered so the scroll parallax (heroParallax,
+     ±15% of this wrapper's height) can drift the background without ever
+     exposing a top/bottom edge. The section clips the overhang. */
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  right: 0;
+  will-change: transform;
 }
 
 .bgLayer {

@@ -1,15 +1,22 @@
 "use client";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { StatChip } from "@/components/ui/StatChip";
 import { PropertyImage } from "@/components/ui/PropertyImage";
 import { properties } from "@/lib/data-utils";
-import { heroEntrance, heroRotateMs, heroBgLayer, heroFeaturedSwap } from "@/lib/motion";
+import { heroEntrance, heroRotateMs, heroBgLayer, heroFeaturedSwap, heroParallax } from "@/lib/motion";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   const featuredList = properties;
   const [index, setIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: heroParallax.scrollOffset,
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], heroParallax.yRange);
 
   useEffect(() => {
     if (featuredList.length <= 1) return;
@@ -22,8 +29,8 @@ export default function Hero() {
   const featured = featuredList[index];
 
   return (
-    <section className={styles.hero}>
-      <div className={styles.bgWrapper}>
+    <section ref={sectionRef} className={styles.hero}>
+      <motion.div className={styles.bgWrapper} style={{ y: bgY }}>
         <AnimatePresence>
           <motion.div
             key={featured.slug}
@@ -37,7 +44,7 @@ export default function Hero() {
           </motion.div>
         </AnimatePresence>
         <div className={styles.scrim} />
-      </div>
+      </motion.div>
 
       <motion.div
         className={styles.textBlock}

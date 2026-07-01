@@ -31,6 +31,21 @@ export const heroBgLayer = {
   } as Transition,
 };
 
+/** Scroll parallax for the hero background. As the hero scrolls out of view,
+ *  the background drifts downward at a fraction of the page speed so it reads as
+ *  sitting behind the content. The wrapper is oversized (see Hero.module.css) so
+ *  this ±shift never exposes an edge. Values are percentages of the wrapper's
+ *  own height, consumed via useTransform. */
+export const heroParallax: {
+  scrollOffset: ["start start", "end start"];
+  yRange: [string, string];
+} = {
+  /** scrollYProgress range: hero pinned at top -> fully scrolled past. */
+  scrollOffset: ["start start", "end start"],
+  /** y output at [progress 0, progress 1]. */
+  yRange: ["-15%", "15%"],
+};
+
 /** Content swap for the featured-property card as it rotates. */
 export const heroFeaturedSwap = {
   initial: { opacity: 0, y: 12 },
