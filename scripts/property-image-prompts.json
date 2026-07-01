@@ -192,6 +192,42 @@
           "prompt": "Private speedboat dock of the same overwater villa in El Nido, Palawan, Philippines, white-rendered concrete with board-formed concrete accents, black steel railings, limestone archipelago in the distance, warm late-afternoon haze. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
         }
       ]
+    },
+    {
+      "slug": "siargao-surf-retreat",
+      "architecture": "white-washed concrete walls with board-formed concrete accents, black steel-framed louvred screens, deep timber-lined verandas, flat overhanging roofs, with marble accents at the entry threshold and kitchen counters",
+      "images": [
+        {
+          "path": "public/images/properties/siargao-surf-retreat/01.webp",
+          "prompt": "Modern four-bedroom surf retreat a short walk from the Cloud 9 break in General Luna, Siargao, Philippines, white-washed concrete walls with board-formed concrete accents, black steel-framed louvred screens, deep timber-lined verandas, flat overhanging roofs, marble-paved entry threshold, coconut-palm garden, warm late-afternoon light. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
+        },
+        {
+          "path": "public/images/properties/siargao-surf-retreat/02.webp",
+          "prompt": "Shaded veranda and coconut-palm garden of the same surf retreat in General Luna, Siargao, Philippines, white-washed concrete walls with board-formed concrete accents, black steel-framed louvred screens, deep timber-lined veranda, polished concrete flooring, a sand path leading toward the surf, warm dappled light through the palms. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
+        },
+        {
+          "path": "public/images/properties/siargao-surf-retreat/03.webp",
+          "prompt": "Open-plan interior of the same surf retreat in General Luna, Siargao, Philippines, white-washed concrete walls with board-formed concrete accents, black steel-framed louvred screens pulling the sea breeze through, polished concrete floors with a marble kitchen counter accent, warm relaxed tropical light. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
+        }
+      ]
+    },
+    {
+      "slug": "nusa-penida-cliff-house",
+      "architecture": "white-rendered concrete volumes with board-formed concrete accents, black steel-framed floor-to-ceiling glass, flat cantilevered roofline, with marble accents at the pool coping and bedroom terraces",
+      "images": [
+        {
+          "path": "public/images/properties/nusa-penida-cliff-house/01.webp",
+          "prompt": "Modern four-bedroom cliff house anchored to the limestone cliffs of the western coast of Nusa Penida, Klungkung, Indonesia, white-rendered concrete volumes with board-formed concrete accents, black steel-framed floor-to-ceiling glass, flat cantilevered roofline, hanging above turquoise water, golden hour, dramatic ocean view. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
+        },
+        {
+          "path": "public/images/properties/nusa-penida-cliff-house/02.webp",
+          "prompt": "Glass-edged infinity pool tracing the cliff line of the same cliff house in Nusa Penida, Klungkung, Indonesia, white-rendered concrete decking with board-formed concrete accents and marble pool coping, black steel railing, appearing to spill toward the open Indian Ocean far below, warm reflected evening light on the water. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
+        },
+        {
+          "path": "public/images/properties/nusa-penida-cliff-house/03.webp",
+          "prompt": "Cantilevered bedroom terrace of the same cliff house in Nusa Penida, Klungkung, Indonesia, white-rendered concrete with board-formed concrete accents and marble terrace flooring, black steel-framed floor-to-ceiling glass, unobstructed view of the open ocean and a private cove below, warm sunset tones. Photorealistic architectural real estate photography, full-frame DSLR, 24mm lens, golden hour lighting, warm natural color grading, soft shadows, shallow depth of field, magazine editorial quality, no people, no text or watermarks, ultra-detailed, 8k"
+        }
+      ]
     }
   ]
 }

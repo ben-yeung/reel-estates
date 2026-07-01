@@ -107,13 +107,12 @@ export function PropertyDetailModal({
 
         <div className={styles.body}>
           <div className={styles.left}>
-            <PropertyGallery images={property.images} name={property.name} />
-            <h2 id={headingId} className={styles.name}>
-              {property.name}
-            </h2>
-            <p className={styles.location}>
-              {property.location.city}, {property.location.region}, {property.location.country}
-            </p>
+            <PropertyGallery
+              images={property.images}
+              name={property.name}
+              location={`${property.location.city}, ${property.location.region}, ${property.location.country}`}
+              headingId={headingId}
+            />
             <p className={styles.description}>{property.description}</p>
           </div>
           <div className={styles.right}>

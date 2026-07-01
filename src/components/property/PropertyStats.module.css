@@ -1,6 +1,7 @@
 .stats {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1vw;
   padding-block: 1.2vw;
   /* StatChip has no font-size of its own - it inherits this, which is what
@@ -17,7 +18,6 @@
 
 @media (max-width: 860px) {
   .stats {
-    justify-content: center;
     gap: 3vw;
     padding-block: 3vw;
     font-size: 3.2vw;

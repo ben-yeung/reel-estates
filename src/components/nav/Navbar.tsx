@@ -6,10 +6,10 @@ import { navVariants, navColorTransitionMs } from "@/lib/motion";
 import styles from "./Navbar.module.css";
 
 const links = [
+  { label: "About", href: "/#about" },
   { label: "Properties", href: "/#properties" },
   { label: "Locations", href: "/#locations" },
   { label: "Agents", href: "/#agents" },
-  { label: "About", href: "/#about" },
 ];
 
 export default function Navbar() {
