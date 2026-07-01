@@ -12,7 +12,7 @@
 }
 
 .header {
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .eyebrow {
@@ -30,14 +30,6 @@
   font-size: clamp(calc(32px * var(--scale)), calc(3.6vw * var(--scale)), 2.75rem);
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 0.85rem;
-}
-
-.subtitle {
-  max-width: none;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--muted);
 }
 
 .card {

@@ -65,9 +65,6 @@ function ConsultationBookingInner() {
         >
           <p className={styles.eyebrow}>Get In Touch</p>
           <h2 className={styles.title}>Book a Consultation</h2>
-          <p className={styles.subtitle}>
-            Pick a property to speak with its agent, or send a general enquiry - choose a time that suits you.
-          </p>
         </motion.div>
 
         <div className={styles.card}>
