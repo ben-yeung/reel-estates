@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import ReelPreview from "@/components/sections/ReelPreview";
 import FeaturedProperties from "@/components/sections/FeaturedProperties";
+import MeetTheTeam from "@/components/sections/MeetTheTeam";
 import { SectionPlaceholder } from "@/components/sections/SectionPlaceholder";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
       <ReelPreview />
       <FeaturedProperties />
       <SectionPlaceholder id="locations" eyebrow="Where We Build" title="Locations" />
-      <SectionPlaceholder id="agents" eyebrow="Meet The Team" title="Agents" />
+      <MeetTheTeam />
       <SectionPlaceholder id="contact" eyebrow="Get In Touch" title="Contact" />
     </>
   );
