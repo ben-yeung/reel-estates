@@ -11,15 +11,19 @@ export function PropertyGallery({ images, name }: { images: string[]; name: stri
   // state) on every prev/next step rather than receiving new `images` in place.
   const [active, setActive] = useState(0);
 
-  // Left/Right cycles gallery images. This component only exists while the
-  // detail modal is open, so the listener is implicitly scoped to that lifetime.
-  // Esc and Tab are owned by the modal, not here, so there's no key overlap.
+  const showPrev = () => setActive((i) => (i - 1 + images.length) % images.length);
+  const showNext = () => setActive((i) => (i + 1) % images.length);
+
+  // Left/Right cycles gallery images (looped). This component only exists while
+  // the detail modal is open, so the listener is implicitly scoped to that
+  // lifetime. Esc and Tab are owned by the modal, not here, so there's no key
+  // overlap.
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "ArrowRight") {
-        setActive((i) => Math.min(i + 1, images.length - 1));
+        setActive((i) => (i + 1) % images.length);
       } else if (e.key === "ArrowLeft") {
-        setActive((i) => Math.max(i - 1, 0));
+        setActive((i) => (i - 1 + images.length) % images.length);
       }
     }
     window.addEventListener("keydown", handleKeyDown);
@@ -46,6 +50,29 @@ export function PropertyGallery({ images, name }: { images: string[]; name: stri
             />
           </motion.div>
         </AnimatePresence>
+
+        {/* Looped prev/next controls. Shown only on mobile (CSS), where they
+            replace the thumbnail strip to save vertical space. */}
+        {images.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={showPrev}
+              aria-label="Previous image"
+              className={`${styles.arrow} ${styles.arrowPrev}`}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={showNext}
+              aria-label="Next image"
+              className={`${styles.arrow} ${styles.arrowNext}`}
+            >
+              ›
+            </button>
+          </>
+        )}
       </div>
 
       {images.length > 1 && (

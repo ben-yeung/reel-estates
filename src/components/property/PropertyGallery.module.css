@@ -57,19 +57,52 @@
   inset: 0;
 }
 
+/* Overlaid prev/next controls - hidden on desktop, where the thumbnail strip is
+   the picker. Revealed on mobile below. */
+.arrow {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .hero {
     height: 55vw;
     border-radius: 3vw;
   }
 
+  /* Mobile navigates the gallery with the overlaid arrows instead, dropping the
+     thumbnail strip to reclaim vertical space in the modal. */
   .thumbStrip {
-    gap: 2vw;
+    display: none;
   }
 
-  .thumb {
-    width: 16vw;
-    height: 11vw;
-    border-radius: 2vw;
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 10vw;
+    padding: 0;
+    padding-bottom: 0.8vw;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    color: white;
+    font-size: 6vw;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .arrowPrev {
+    left: 3vw;
+  }
+
+  .arrowNext {
+    right: 3vw;
   }
 }

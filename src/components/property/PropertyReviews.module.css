@@ -1,0 +1,222 @@
+/* Sits in the right column beneath the agent card + stats, filling the space
+   the shorter column used to leave empty and revealing several comments before
+   the list scrolls. vw sizing matches the rest of the modal
+   (PropertyDetailModal.module.css). */
+.reviews {
+  display: flex;
+  flex-direction: column;
+  /* flex:1 lets the section grow to match a taller left column; the min-height
+     floor makes it drive the modal taller than the left column when needed, so
+     several comments show before the list scrolls rather than being squeezed
+     into the little space the left column leaves.
+     The floor is in vh - the SAME axis as the panel's max-height: 88vh cap - so
+     it can never outgrow the viewport height and push the modal into its own
+     scroll (a vw floor balloons past the vh cap on wide, short screens). */
+  flex: 1;
+  min-height: 28vh;
+  /* Small breathing room off the panel's bottom edge - not enough to eat into
+     the visible comments. */
+  margin-bottom: 0.6vw;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1vw;
+  margin-bottom: 0.9vw;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 1vw;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.stats {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9vw;
+  white-space: nowrap;
+}
+
+.stat {
+  font-size: 0.85vw;
+  color: var(--muted);
+}
+
+.stat:first-child {
+  font-weight: 600;
+  color: var(--warm);
+}
+
+/* A raised card that frames the comments as their own contained area, matching
+   the agent consultation card's treatment (white surface + drop shadow) so the
+   two read as sibling cards rather than one popping out and one sinking in.
+   overflow:hidden clips the scrolling list to the rounded corners. */
+.listWrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: white;
+  border-radius: 1.3vw;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.list {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9vw;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.95vw 0.6vw 0.95vw 0.95vw;
+  /* Feathers the bottom edge so comments fade into the container as they scroll
+     past instead of being bluntly sliced off. Sized to the bottom padding so an
+     un-scrolled short thread barely feathers, while a long one dissolves. */
+  --fade: 1.1vw;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), transparent);
+  /* Styled thin scrollbar in the warm accent - Firefox. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(184, 154, 122, 0.55) transparent;
+}
+
+/* Styled thin scrollbar - WebKit/Chromium. */
+.list::-webkit-scrollbar {
+  width: 0.35vw;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: rgba(184, 154, 122, 0.5);
+  border-radius: 999px;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 154, 122, 0.8);
+}
+
+.comment {
+  display: flex;
+  gap: 0.7vw;
+}
+
+.avatar {
+  width: 2vw;
+  height: 2vw;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--warm-dark), var(--text));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.8vw;
+  font-weight: 700;
+}
+
+.bubble {
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6vw;
+}
+
+.author {
+  font-family: var(--font-heading);
+  font-size: 0.9vw;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.likes {
+  font-size: 0.8vw;
+  font-weight: 600;
+  color: var(--warm);
+  white-space: nowrap;
+}
+
+.text {
+  font-size: 0.92vw;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 0.2vw;
+}
+
+@media (max-width: 860px) {
+  .header {
+    margin-bottom: 3vw;
+  }
+
+  .title {
+    font-size: 4vw;
+  }
+
+  .stats {
+    gap: 3vw;
+  }
+
+  .stat {
+    font-size: 3vw;
+  }
+
+  /* Stacked single-column layout: the section has no tall sibling column to
+     borrow height from, so the list falls back to normal flow with a capped
+     height and scrolls in place. */
+  .reviews {
+    /* Stacked layout scrolls the list in place with a capped height, so the
+       desktop min-height floor is dropped here. */
+    min-height: 0;
+    margin-bottom: 4vw;
+  }
+
+  .listWrap {
+    position: static;
+    flex: none;
+    border-radius: 4vw;
+  }
+
+  .list {
+    position: static;
+    max-height: 70vw;
+    gap: 3.5vw;
+    padding: 3vw 2vw 3vw 3vw;
+    --fade: 4vw;
+  }
+
+  .comment {
+    gap: 2.5vw;
+  }
+
+  .avatar {
+    width: 8vw;
+    height: 8vw;
+    font-size: 3vw;
+  }
+
+  .meta {
+    gap: 2vw;
+  }
+
+  .author {
+    font-size: 3.2vw;
+  }
+
+  .likes {
+    font-size: 2.9vw;
+  }
+
+  .text {
+    font-size: 3.3vw;
+  }
+}

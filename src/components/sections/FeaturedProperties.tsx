@@ -43,7 +43,7 @@ function FeaturedPropertiesInner() {
           className={styles.header}
         >
           <p className={styles.eyebrow}>The Collection</p>
-          <h2 className={styles.title}>Featured Properties</h2>
+          <h2 className={styles.title}>Our Properties</h2>
         </motion.div>
 
         <motion.div

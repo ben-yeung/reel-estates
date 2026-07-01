@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
 import { PropertyGallery } from "@/components/property/PropertyGallery";
 import { PropertyStats } from "@/components/property/PropertyStats";
 import { AgentSidebar } from "@/components/property/AgentSidebar";
-import { getAgentBySlug, getPropertyBySlug, formatPrice } from "@/lib/data-utils";
+import { PropertyReviews } from "@/components/property/PropertyReviews";
+import { getAgentBySlug, getPropertyBySlug, getPropertyReel, formatPrice } from "@/lib/data-utils";
 import { EASE_STANDARD } from "@/lib/motion";
 import styles from "./PropertyDetailModal.module.css";
 
@@ -24,6 +24,7 @@ export function PropertyDetailModal({
 
   const property = getPropertyBySlug(slug);
   const agent = property ? getAgentBySlug(property.agentSlug) : undefined;
+  const reel = property ? getPropertyReel(property.slug) : undefined;
 
   // Defensive: a stale or hand-typed `?property=` slug shouldn't crash the page,
   // it should just fall back to a closed modal.
@@ -103,13 +104,6 @@ export function PropertyDetailModal({
         <div className={styles.body}>
           <div className={styles.left}>
             <PropertyGallery images={property.images} name={property.name} />
-            <div className={styles.tags}>
-              {property.tags.map((tag) => (
-                <Badge key={tag} variant="dark">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
             <h2 id={headingId} className={styles.name}>
               {property.name}
             </h2>
@@ -121,6 +115,9 @@ export function PropertyDetailModal({
           <div className={styles.right}>
             <AgentSidebar agent={agent} formattedPrice={formatPrice(property.price)} />
             <PropertyStats beds={property.beds} baths={property.baths} sqft={property.sqft} />
+            {reel && reel.comments.length > 0 && (
+              <PropertyReviews comments={reel.comments} likes={reel.likes} />
+            )}
           </div>
         </div>
       </motion.div>

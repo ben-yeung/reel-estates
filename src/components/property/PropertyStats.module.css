@@ -17,6 +17,7 @@
 
 @media (max-width: 860px) {
   .stats {
+    justify-content: center;
     gap: 3vw;
     padding-block: 3vw;
     font-size: 3.2vw;

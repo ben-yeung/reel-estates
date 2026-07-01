@@ -8,7 +8,7 @@ describe("ReelPreview", () => {
   it("renders the about copy and the reel stage showing the first property", () => {
     render(<ReelPreview />);
 
-    expect(screen.getByText("Browse Properties")).toBeInTheDocument();
+    expect(screen.getByText("How We Work")).toBeInTheDocument();
     expect(screen.getByText(properties[0].name)).toBeInTheDocument();
   });
 

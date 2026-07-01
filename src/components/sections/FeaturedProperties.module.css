@@ -1,32 +1,32 @@
 .section {
   width: 100%;
-  padding-block: 96px;
+  padding-block: 6rem;
   background: var(--bg);
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: 75rem;
   margin-inline: auto;
-  padding-inline: 32px;
+  padding-inline: 2rem;
 }
 
 .header {
-  margin-bottom: 56px;
+  margin-bottom: 3.5rem;
 }
 
 .eyebrow {
   font-family: var(--font-heading);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--warm);
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
 }
 
 .title {
   font-family: var(--font-heading);
-  font-size: clamp(32px, 3.6vw, 44px);
+  font-size: clamp(calc(32px * var(--scale)), calc(3.6vw * var(--scale)), 2.75rem);
   font-weight: 700;
   color: var(--text);
 }
@@ -34,7 +34,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 1.75rem;
 }
 
 @media (max-width: 980px) {
@@ -49,6 +49,6 @@
   }
 
   .inner {
-    padding-inline: 20px;
+    padding-inline: 1.25rem;
   }
 }
