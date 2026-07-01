@@ -11,6 +11,13 @@
   padding: 1.125rem 2rem 1rem;
 }
 
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
 .brand {
   display: flex;
   flex-direction: column;
@@ -37,6 +44,109 @@
   font-size: 0.9375rem;
   line-height: 1.6;
   color: rgba(26, 26, 26, 0.72);
+}
+
+/* Desktop-only listing-alerts capture. Two rows sized to sit within the brand
+   block's height so the footer stays as short as the brand-only layout. */
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.newsletterTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.newsletterHeading {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.socials {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.socialLink {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 26, 26, 0.22);
+  color: var(--text);
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.socialLink:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.socialLink svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.emailInput {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(26, 26, 26, 0.22);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--text);
+  width: 14rem;
+}
+
+.emailInput::placeholder {
+  color: rgba(26, 26, 26, 0.55);
+}
+
+.emailInput:focus-visible {
+  outline: none;
+  border-color: var(--text);
+}
+
+.submit {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--text);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.submit:hover {
+  opacity: 0.85;
+}
+
+.subscribed {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text);
+  /* Match the form's height so flipping to the confirmation doesn't shift the
+     footer. */
+  padding: 0.5rem 0;
 }
 
 .bottomBar {
@@ -66,6 +176,14 @@
 
 .noticeLink:hover {
   opacity: 0.65;
+}
+
+/* Desktop-only: below 860px the right-side capture is dropped and the footer
+   reverts to the brand-only layout. */
+@media (max-width: 860px) {
+  .newsletter {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
