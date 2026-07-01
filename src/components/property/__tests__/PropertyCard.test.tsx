@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { PropertyCard } from "../PropertyCard";
@@ -10,8 +10,11 @@ describe("PropertyCard", () => {
     render(<PropertyCard property={property} onOpen={() => {}} />);
 
     expect(screen.getByText(property.name)).toBeInTheDocument();
-    expect(screen.getByText(String(property.beds))).toBeInTheDocument();
-    expect(screen.getByText(String(property.baths))).toBeInTheDocument();
+    // Scope to the spec row: bare bed/bath numbers can otherwise collide with
+    // the reel engagement counts overlaid on the image.
+    const specs = within(screen.getByTestId("property-specs"));
+    expect(specs.getByText(String(property.beds))).toBeInTheDocument();
+    expect(specs.getByText(String(property.baths))).toBeInTheDocument();
   });
 
   it("shows a Featured badge only for featured properties", () => {
