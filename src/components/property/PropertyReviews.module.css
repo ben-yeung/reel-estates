@@ -5,15 +5,13 @@
 .reviews {
   display: flex;
   flex-direction: column;
-  /* flex:1 lets the section grow to match a taller left column; the min-height
-     floor makes it drive the modal taller than the left column when needed, so
-     several comments show before the list scrolls rather than being squeezed
-     into the little space the left column leaves.
-     The floor is in vh - the SAME axis as the panel's max-height: 88vh cap - so
-     it can never outgrow the viewport height and push the modal into its own
-     scroll (a vw floor balloons past the vh cap on wide, short screens). */
+  /* flex:1 fills the right column down to the (taller) left column's height,
+     absorbing the deadspace the shorter column used to leave. No min-height
+     floor: forcing the section taller than the left column pushed the whole
+     modal past its 88vh cap on shorter screens, so instead the list simply
+     fills the available space and scrolls internally when the thread is long. */
   flex: 1;
-  min-height: 28vh;
+  min-height: 0;
   /* Small breathing room off the panel's bottom edge - not enough to eat into
      the visible comments. */
   margin-bottom: 0.6vw;
@@ -24,7 +22,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 1vw;
-  margin-bottom: 0.9vw;
+  margin-bottom: 0.7vw;
 }
 
 .title {
@@ -61,7 +59,7 @@
   min-height: 0;
   background: white;
   border-radius: 1.3vw;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(184, 154, 122, 0.55);
   overflow: hidden;
 }
 
@@ -73,7 +71,7 @@
   gap: 0.9vw;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0.95vw 0.6vw 0.95vw 0.95vw;
+  padding: 0.8vw 0.5vw 0.8vw 0.8vw;
   /* Feathers the bottom edge so comments fade into the container as they scroll
      past instead of being bluntly sliced off. Sized to the bottom padding so an
      un-scrolled short thread barely feathers, while a long one dissolves. */
@@ -174,9 +172,6 @@
      borrow height from, so the list falls back to normal flow with a capped
      height and scrolls in place. */
   .reviews {
-    /* Stacked layout scrolls the list in place with a capped height, so the
-       desktop min-height floor is dropped here. */
-    min-height: 0;
     margin-bottom: 4vw;
   }
 

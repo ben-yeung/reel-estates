@@ -24,17 +24,21 @@
   overflow: hidden;
 }
 
+/* Content sized in cqw (% of the phone screen width, per ReelStage .screen) so
+   the sheet stays proportional to the phone at any viewport height - matching
+   the reel card and action rail. Corner radii stay in rem so the sheet's
+   rounding still matches the phone screen's clip (ReelStage .screen). */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding: 4cqw 5.4cqw;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .headerTitle {
   font-family: var(--font-heading);
-  font-size: 0.6875rem;
+  font-size: 3.8cqw;
   font-weight: 600;
   color: var(--text);
 }
@@ -42,7 +46,7 @@
 .closeButton {
   background: none;
   border: none;
-  font-size: 1.125rem;
+  font-size: 6cqw;
   line-height: 1;
   color: var(--muted);
   cursor: pointer;
@@ -51,11 +55,11 @@
 
 .list {
   overflow-y: auto;
-  max-height: 11.875rem;
-  padding: 0.5rem 1rem 1rem;
+  max-height: 62cqw;
+  padding: 2.7cqw 5.4cqw 5.4cqw;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 4cqw;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* legacy Edge/IE */
 }
@@ -66,12 +70,12 @@
 
 .comment {
   display: flex;
-  gap: 0.5rem;
+  gap: 2.7cqw;
 }
 
 .avatar {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 9.5cqw;
+  height: 9.5cqw;
   flex-shrink: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--warm-dark), var(--text));
@@ -79,19 +83,19 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 0.625rem;
+  font-size: 3.4cqw;
   font-weight: 700;
 }
 
 .author {
   font-family: var(--font-heading);
-  font-size: 0.625rem;
+  font-size: 3.6cqw;
   font-weight: 600;
   color: var(--text);
 }
 
 .text {
-  font-size: 0.75rem;
+  font-size: 4cqw;
   color: var(--muted);
-  margin-top: 0.125rem;
+  margin-top: 0.7cqw;
 }

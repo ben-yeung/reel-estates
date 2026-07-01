@@ -15,9 +15,11 @@ const FOCUSABLE_SELECTOR =
 export function PropertyDetailModal({
   slug,
   onClose,
+  onBookConsultation,
 }: {
   slug: string;
   onClose: () => void;
+  onBookConsultation?: () => void;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
@@ -43,7 +45,9 @@ export function PropertyDetailModal({
     panelRef.current?.focus();
     return () => {
       document.body.style.overflow = "";
-      previouslyFocusedRef.current?.focus();
+      // preventScroll so restoring focus doesn't yank the page back up - e.g.
+      // when closing to deep-link into the Consultation Booking below.
+      previouslyFocusedRef.current?.focus({ preventScroll: true });
     };
   }, []);
 
@@ -103,17 +107,20 @@ export function PropertyDetailModal({
 
         <div className={styles.body}>
           <div className={styles.left}>
-            <PropertyGallery images={property.images} name={property.name} />
-            <h2 id={headingId} className={styles.name}>
-              {property.name}
-            </h2>
-            <p className={styles.location}>
-              {property.location.city}, {property.location.region}, {property.location.country}
-            </p>
+            <PropertyGallery
+              images={property.images}
+              name={property.name}
+              location={`${property.location.city}, ${property.location.region}, ${property.location.country}`}
+              headingId={headingId}
+            />
             <p className={styles.description}>{property.description}</p>
           </div>
           <div className={styles.right}>
-            <AgentSidebar agent={agent} formattedPrice={formatPrice(property.price)} />
+            <AgentSidebar
+              agent={agent}
+              formattedPrice={formatPrice(property.price)}
+              onBookConsultation={onBookConsultation}
+            />
             <PropertyStats beds={property.beds} baths={property.baths} sqft={property.sqft} />
             {reel && reel.comments.length > 0 && (
               <PropertyReviews comments={reel.comments} likes={reel.likes} />

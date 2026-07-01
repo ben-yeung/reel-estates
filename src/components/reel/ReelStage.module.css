@@ -2,10 +2,11 @@
   position: relative;
   aspect-ratio: 1 / 1.9;
   /* Height-driven so the portrait phone always fits the section's viewport
-     height (100vh minus the ~12rem of padding-block, plus room for the hint),
-     rather than overflowing. Width follows from the aspect ratio. Caps at the
-     design height (37.5rem, which scales with --scale) on tall screens. */
-  height: min(calc(100vh - 14rem), 37.5rem);
+     height (100vh minus the section's 12rem padding-block, plus a little room
+     for the hint), rather than overflowing. Width follows from the aspect
+     ratio. Caps at the design height (37.5rem, which scales with --scale) on
+     tall screens. */
+  height: min(calc(100vh - 12.5rem), 37.5rem);
   width: auto;
   margin-inline: auto;
   border-radius: 1.75rem;
@@ -29,6 +30,11 @@
   position: relative;
   width: 100%;
   height: 100%;
+  /* Container for the reel content: everything inside sizes in cqw (% of the
+     phone's own width) so icons and text stay proportional to the phone at any
+     viewport height, instead of scaling with the root rem while the phone is
+     height-capped. */
+  container-type: inline-size;
   border-radius: 1.25rem;
   overflow: hidden;
   background: #111;

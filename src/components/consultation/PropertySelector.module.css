@@ -1,0 +1,104 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 30rem;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+/* Slim, on-brand scrollbar so the panel doesn't read as a raw list. */
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+.list::-webkit-scrollbar-thumb {
+  background: rgba(184, 154, 122, 0.35);
+  border-radius: 3px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.row:hover {
+  background: rgba(184, 154, 122, 0.08);
+}
+
+.rowSelected,
+.rowSelected:hover {
+  border-color: var(--warm);
+  background: rgba(184, 154, 122, 0.14);
+}
+
+.thumb {
+  position: relative;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.55rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.thumbImg {
+  position: absolute;
+  inset: 0;
+}
+
+.generalIcon {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.55rem;
+  flex-shrink: 0;
+  background: rgba(184, 154, 122, 0.14);
+  color: var(--warm-dark);
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.rowName {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rowMeta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.rowPrice {
+  margin-left: auto;
+  padding-left: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--warm-dark);
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .list {
+    max-height: 22rem;
+  }
+}

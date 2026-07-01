@@ -1,0 +1,79 @@
+.footer {
+  width: 100%;
+  /* Solid brand-accent band, matching the Navbar logo mark + CTA (--warm).
+     The cream-to-warm color change is the divider, so no top border. */
+  background: var(--warm);
+}
+
+.inner {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding: 1.125rem 2rem 1rem;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.wordmark {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.tagline {
+  max-width: 30rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(26, 26, 26, 0.72);
+}
+
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.875rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.18);
+}
+
+.copyright,
+.notice {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: rgba(26, 26, 26, 0.72);
+}
+
+.noticeLink {
+  /* Dark text on the warm band, underlined; fades slightly on hover. */
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  transition: opacity 160ms ease;
+}
+
+.noticeLink:hover {
+  opacity: 0.65;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 1.125rem 1.25rem 1.125rem;
+    text-align: center;
+  }
+
+  .brand {
+    align-items: center;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    text-align: center;
+  }
+}

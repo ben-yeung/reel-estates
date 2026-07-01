@@ -5,7 +5,17 @@ import { PropertyImage } from "@/components/ui/PropertyImage";
 import { EASE_STANDARD } from "@/lib/motion";
 import styles from "./PropertyGallery.module.css";
 
-export function PropertyGallery({ images, name }: { images: string[]; name: string }) {
+export function PropertyGallery({
+  images,
+  name,
+  location,
+  headingId,
+}: {
+  images: string[];
+  name: string;
+  location: string;
+  headingId: string;
+}) {
   // No need to reset `active` on prop change: the parent modal keys its content
   // block by property slug, so this component fully remounts (fresh `active`
   // state) on every prev/next step rather than receiving new `images` in place.
@@ -75,22 +85,35 @@ export function PropertyGallery({ images, name }: { images: string[]; name: stri
         )}
       </div>
 
-      {images.length > 1 && (
-        <div className={styles.thumbStrip}>
-          {images.map((src, i) => (
-            <button
-              key={src}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Show image ${i + 1} of ${images.length}`}
-              aria-current={i === active}
-              className={`${styles.thumb} ${i === active ? styles.thumbActive : ""}`}
-            >
-              <PropertyImage src={src} alt="" className={styles.thumbImage} />
-            </button>
-          ))}
+      {/* Name/location and the thumbnail picker share one row to save vertical
+          space: caption stacked on the left, thumbnails right-aligned and
+          centered against it. On mobile the thumbnails are hidden (the hero
+          arrows navigate instead), leaving just the caption. */}
+      <div className={styles.metaRow}>
+        <div className={styles.meta}>
+          <h2 id={headingId} className={styles.name}>
+            {name}
+          </h2>
+          <p className={styles.location}>{location}</p>
         </div>
-      )}
+
+        {images.length > 1 && (
+          <div className={styles.thumbStrip}>
+            {images.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`Show image ${i + 1} of ${images.length}`}
+                aria-current={i === active}
+                className={`${styles.thumb} ${i === active ? styles.thumbActive : ""}`}
+              >
+                <PropertyImage src={src} alt="" className={styles.thumbImage} />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

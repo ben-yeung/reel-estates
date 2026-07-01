@@ -1,0 +1,95 @@
+.section {
+  width: 100%;
+  padding-block: 6rem;
+  background: var(--bg);
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+}
+
+.inner {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.65625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(calc(32px * var(--scale)), calc(3.6vw * var(--scale)), 2.75rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+}
+
+.subtitle {
+  max-width: 34rem;
+  margin-inline: auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.left {
+  padding: 2rem;
+  border-right: 1px solid rgba(26, 26, 26, 0.08);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+@media (max-width: 860px) {
+  .section {
+    padding-block: 4rem;
+  }
+
+  .inner {
+    padding-inline: 1.25rem;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .left {
+    border-right: none;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+    padding: 1.5rem;
+  }
+
+  .right {
+    padding: 1.5rem;
+  }
+}
+
+/* Cap the card width on very large viewports so it doesn't stretch edge-to-edge;
+   the section inner already caps at 68rem, this keeps the two panels comfortable. */
+@media (min-width: 1920px) {
+  .inner {
+    max-width: 76rem;
+  }
+}
