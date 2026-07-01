@@ -10,7 +10,7 @@ export const agents: Agent[] = [
     quote: 'Every property tells a story. My job is to make sure the right people hear it.',
     reelCount: 42,
     totalViews: 1_200_000,
-    avatar: '/images/agents/siriporn-thanawan.jpg',
+    avatar: '/images/agents/siriporn-thanawan.webp',
     socialLinks: [{ platform: 'instagram', url: 'https://instagram.com' }, { platform: 'tiktok', url: 'https://tiktok.com' }],
   },
   {
@@ -22,7 +22,7 @@ export const agents: Agent[] = [
     quote: 'Bali has a way of choosing you. I just help you find where you belong within it.',
     reelCount: 38,
     totalViews: 980_000,
-    avatar: '/images/agents/made-wijaya.jpg',
+    avatar: '/images/agents/made-wijaya.webp',
     socialLinks: [{ platform: 'instagram', url: 'https://instagram.com' }, { platform: 'tiktok', url: 'https://tiktok.com' }, { platform: 'youtube', url: 'https://youtube.com' }],
   },
   {
@@ -34,7 +34,7 @@ export const agents: Agent[] = [
     quote: 'Vietnam is moving fast. The right property today will be a landmark tomorrow.',
     reelCount: 24,
     totalViews: 560_000,
-    avatar: '/images/agents/linh-nguyen.jpg',
+    avatar: '/images/agents/linh-nguyen.webp',
     socialLinks: [{ platform: 'instagram', url: 'https://instagram.com' }, { platform: 'tiktok', url: 'https://tiktok.com' }],
   },
   {
@@ -46,7 +46,7 @@ export const agents: Agent[] = [
     quote: 'The Philippines has 7,641 islands. Finding the right one is what I do.',
     reelCount: 18,
     totalViews: 420_000,
-    avatar: '/images/agents/carlos-reyes.jpg',
+    avatar: '/images/agents/carlos-reyes.webp',
     socialLinks: [{ platform: 'instagram', url: 'https://instagram.com' }, { platform: 'youtube', url: 'https://youtube.com' }],
   },
   {
@@ -58,7 +58,7 @@ export const agents: Agent[] = [
     quote: "Northern Thailand's architecture scene is one of the best-kept secrets in Asia.",
     reelCount: 31,
     totalViews: 750_000,
-    avatar: '/images/agents/alex-hartmann.jpg',
+    avatar: '/images/agents/alex-hartmann.webp',
     socialLinks: [{ platform: 'instagram', url: 'https://instagram.com' }, { platform: 'tiktok', url: 'https://tiktok.com' }],
   },
 ]

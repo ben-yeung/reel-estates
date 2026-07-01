@@ -1,0 +1,205 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: rgba(184, 154, 122, 0.1);
+  border-radius: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.chipAvatar {
+  position: relative;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.chipAvatarImg {
+  position: absolute;
+  inset: 0;
+}
+
+.chipText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.chipLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-dark);
+}
+
+.chipName {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.chipTitle {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.slot {
+  padding: 0.5rem 0.95rem;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+  border-radius: 2rem;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.slot:hover {
+  border-color: var(--warm);
+}
+
+.slotSelected,
+.slotSelected:hover {
+  background: var(--warm);
+  border-color: var(--warm);
+  color: #fff;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.input {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+  border-radius: 0.6rem;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--warm);
+}
+
+.confirm {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: var(--warm);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.confirm:hover:not(:disabled) {
+  background: var(--warm-dark);
+}
+
+.confirm:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+.successIcon {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: rgba(184, 154, 122, 0.16);
+  color: var(--warm-dark);
+  margin-bottom: 1rem;
+}
+
+.successTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.successText {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 22rem;
+}
+
+.successText strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.bookAnother {
+  margin-top: 1.5rem;
+  padding: 0.65rem 1.4rem;
+  border: 1px solid var(--warm);
+  border-radius: 0.6rem;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--warm-dark);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.bookAnother:hover {
+  background: rgba(184, 154, 122, 0.1);
+}
