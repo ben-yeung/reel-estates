@@ -1,13 +1,16 @@
 "use client";
 import { motion } from "framer-motion";
 import { AgentCard } from "@/components/agent/AgentCard";
+import { SnapCarousel } from "@/components/ui/SnapCarousel";
 import { agents } from "@/lib/data-utils";
+import { useIsMobile } from "@/lib/useMediaQuery";
 import { reelPreviewCopy } from "@/lib/motion";
 import styles from "./MeetTheTeam.module.css";
 
 // Senior agents already lead the data array, so the roster renders in-order -
 // no sort needed. See docs/adr/0004.
 export default function MeetTheTeam() {
+  const isMobile = useIsMobile();
   return (
     <section id="agents" className={styles.section}>
       <div className={styles.inner}>
@@ -26,19 +29,27 @@ export default function MeetTheTeam() {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={reelPreviewCopy.container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className={styles.grid}
-        >
-          {agents.map((agent) => (
-            <motion.div key={agent.slug} variants={reelPreviewCopy.item} className={styles.cell}>
-              <AgentCard agent={agent} />
-            </motion.div>
-          ))}
-        </motion.div>
+        {isMobile ? (
+          <SnapCarousel label="Meet the team">
+            {agents.map((agent) => (
+              <AgentCard key={agent.slug} agent={agent} />
+            ))}
+          </SnapCarousel>
+        ) : (
+          <motion.div
+            variants={reelPreviewCopy.container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className={styles.grid}
+          >
+            {agents.map((agent) => (
+              <motion.div key={agent.slug} variants={reelPreviewCopy.item} className={styles.cell}>
+                <AgentCard agent={agent} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );

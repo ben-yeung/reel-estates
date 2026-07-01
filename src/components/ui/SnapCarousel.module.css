@@ -1,0 +1,103 @@
+/* Desktop: a plain positioning context. The track carries the section's grid
+   class (scoped to min-width: 1025px), so the carousel machinery is inert here
+   and the layout is whatever grid the section asks for. */
+.viewport {
+  position: relative;
+  width: 100%;
+}
+
+.track {
+  /* No display here on desktop - the section's grid class owns it. */
+  min-width: 0;
+}
+
+.slide {
+  min-width: 0;
+}
+
+/* The controls row (arrows + dots) only exists on the mobile carousel. */
+.controls {
+  display: none;
+}
+
+/* ---- Mobile carousel (phone + tablet) ---- */
+@media (max-width: 1024px) {
+  .viewport {
+    /* Full-bleed: break out of the section's padded, max-width container so the
+       card track and its peeking neighbours reach the screen edges. */
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    overflow: hidden;
+  }
+
+  .track {
+    --slide-w: 82vw;
+    display: flex;
+    gap: 3.5vw;
+    /* Lead/trail room so the first and last real cards can snap to centre even
+       before the clones mount. */
+    padding-inline: 9vw;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    /* Programmatic jumps must be instant; goTo() opts into smooth per-call. */
+    scroll-behavior: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    flex: 0 0 var(--slide-w);
+    scroll-snap-align: center;
+    /* Reset any desktop grid placement the section applied. */
+    grid-column: auto !important;
+  }
+
+  /* Minimal prev/next arrows flanking the dots - an alternative to swiping and
+     to tapping a neighbour. */
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
+  }
+
+  .arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .arrow:hover {
+    color: var(--text);
+    background: rgba(26, 26, 26, 0.06);
+  }
+
+  .arrow svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+}
+
+/* Wider cards / bigger peek on tablet. */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .track {
+    --slide-w: 58vw;
+    gap: 3vw;
+    padding-inline: 21vw;
+  }
+}

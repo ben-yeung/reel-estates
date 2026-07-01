@@ -2,6 +2,9 @@
   width: 100%;
   padding-block: 6rem;
   background: var(--bg);
+  /* Contain the full-bleed mobile carousel's 100vw viewport so it can never add
+     horizontal page scroll. */
+  overflow-x: clip;
 }
 
 .inner {
@@ -88,5 +91,13 @@
 
   .inner {
     padding-inline: 1.25rem;
+  }
+}
+
+/* Mobile/tablet: match Featured Properties - trim the tall desktop block padding
+   so the carousel + dots don't leave a long gap below the dots. */
+@media (max-width: 1024px) {
+  .section {
+    padding-block: 3rem;
   }
 }

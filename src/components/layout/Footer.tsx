@@ -27,7 +27,9 @@ export default function Footer() {
               <span className={styles.wordmark}>Reel Estates</span>
             </div>
             <p className={styles.tagline}>
-              Modern homes across Southeast Asia, discovered through the reels you love.
+              Modern homes across Southeast Asia,
+              <br />
+              discovered through the reels you love.
             </p>
           </div>
 

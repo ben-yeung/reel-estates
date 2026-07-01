@@ -19,11 +19,18 @@ type Confirmation = {
 export function BookingPanel({
   agent,
   selectionKey,
+  onBack,
+  backLabel,
 }: {
   agent: Agent;
   // Changes whenever the chosen property (or general-enquiry) changes, so a
   // completed booking resets back to the form for the newly selected agent.
   selectionKey: string;
+  // Phone wizard only: returns to the property-selection step. When provided,
+  // the calendar step gains a back control and shows the agent chip up front so
+  // the visitor knows who they are booking with before picking a date.
+  onBack?: () => void;
+  backLabel?: string;
 }) {
   const [date, setDate] = useState<Date | null>(null);
   const [slot, setSlot] = useState<string | null>(null);
@@ -96,6 +103,33 @@ export function BookingPanel({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
+          {onBack && (
+            <>
+              <button
+                type="button"
+                className={styles.back}
+                onClick={onBack}
+                aria-label="Change property"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>{backLabel}</span>
+              </button>
+
+              <div className={styles.chip}>
+                <span className={styles.chipAvatar}>
+                  <PropertyImage src={agent.avatar} alt={agent.name} className={styles.chipAvatarImg} />
+                </span>
+                <span className={styles.chipText}>
+                  <span className={styles.chipLabel}>Booking with</span>
+                  <span className={styles.chipName}>{agent.name}</span>
+                  <span className={styles.chipTitle}>{agent.title}</span>
+                </span>
+              </div>
+            </>
+          )}
+
           <BookingCalendar
             selectedDate={date}
             onSelectDate={(next) => {
@@ -113,17 +147,6 @@ export function BookingPanel({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.25 }}
         >
-          <div className={styles.chip}>
-            <span className={styles.chipAvatar}>
-              <PropertyImage src={agent.avatar} alt={agent.name} className={styles.chipAvatarImg} />
-            </span>
-            <span className={styles.chipText}>
-              <span className={styles.chipLabel}>Booking with</span>
-              <span className={styles.chipName}>{agent.name}</span>
-              <span className={styles.chipTitle}>{agent.title}</span>
-            </span>
-          </div>
-
           <button
             type="button"
             className={styles.back}
@@ -135,6 +158,17 @@ export function BookingPanel({
             </svg>
             <span>{formatBookingDate(date)}</span>
           </button>
+
+          <div className={styles.chip}>
+            <span className={styles.chipAvatar}>
+              <PropertyImage src={agent.avatar} alt={agent.name} className={styles.chipAvatarImg} />
+            </span>
+            <span className={styles.chipText}>
+              <span className={styles.chipLabel}>Booking with</span>
+              <span className={styles.chipName}>{agent.name}</span>
+              <span className={styles.chipTitle}>{agent.title}</span>
+            </span>
+          </div>
 
           <div className={styles.detailsGrid}>
             <div className={styles.info}>
