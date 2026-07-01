@@ -5,6 +5,68 @@
   overflow: hidden;
 }
 
+/* Top scrim keeps the tabs legible over bright photos, mirroring the reel
+   card's bottom scrim. Non-interactive so taps still reach the reel. */
+.topScrim {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 20%;
+  z-index: 25;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent);
+}
+
+/* TikTok-style "Following / For You" tabs, centered at the top. Sized in cqw
+   (% of the phone screen width, per ReelStage .screen) so they stay proportional
+   to the phone at any viewport height. */
+.tabs {
+  position: absolute;
+  top: 3.5cqw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 5cqw;
+}
+
+.tab {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 1cqw 0;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 3.8cqw;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transition: color 0.2s ease;
+}
+
+.tab:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.tabActive {
+  color: white;
+  font-weight: 700;
+}
+
+/* Short underline bar under the active tab. */
+.tabActive::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.3cqw;
+  transform: translateX(-50%);
+  width: 5cqw;
+  height: 0.5cqw;
+  border-radius: 999px;
+  background: white;
+}
+
 .dots {
   position: absolute;
   bottom: 0.75rem;
@@ -13,6 +75,14 @@
   z-index: 30;
   display: flex;
   gap: 0.25rem;
+  transition: opacity 0.2s ease;
+}
+
+/* While the comment drawer is open it should read as on top; the dots sit in a
+   higher feed-level stacking context, so we fade them out rather than fight it. */
+.dotsHidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .dot {

@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { Reel } from "@/lib/types";
 import { commentDrawerTransition } from "@/lib/motion";
+import { commenterAvatar } from "@/lib/avatar";
 import styles from "./CommentDrawer.module.css";
 
 export function CommentDrawer({
@@ -40,7 +41,8 @@ export function CommentDrawer({
             <div className={styles.list}>
               {reel.comments.map((comment) => (
                 <div key={`${comment.author}-${comment.text}`} className={styles.comment}>
-                  <div className={styles.avatar}>{comment.author.replace("@", "")[0]?.toUpperCase() ?? "?"}</div>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- generated data-URI SVG avatar, not a remote asset */}
+                  <img className={styles.avatar} src={commenterAvatar(comment.author)} alt="" />
                   <div>
                     <p className={styles.author}>{comment.author}</p>
                     <p className={styles.text}>{comment.text}</p>

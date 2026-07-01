@@ -111,13 +111,9 @@
   height: 2vw;
   flex-shrink: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--warm-dark), var(--text));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 0.8vw;
-  font-weight: 700;
+  object-fit: cover;
+  /* Shows through while the generated SVG paints and rounds the DiceBear tile. */
+  background: var(--warm-light, #f4e6d9);
 }
 
 .bubble {
@@ -196,7 +192,6 @@
   .avatar {
     width: 8vw;
     height: 8vw;
-    font-size: 3vw;
   }
 
   .meta {

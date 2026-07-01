@@ -12,6 +12,7 @@ See [`CONTEXT.md`](CONTEXT.md) for the domain language and [`docs/adr/`](docs/ad
 - [**React**](https://react.dev/) 19
 - [**TypeScript**](https://www.typescriptlang.org/) 5 (strict)
 - [**framer-motion**](https://www.framer.com/motion/) - animation
+- [**DiceBear**](https://www.dicebear.com/) - deterministic, generated commenter avatars (seeded by handle)
 - **CSS Modules** + design tokens - styling (no Tailwind / CSS-in-JS)
 - [**Vitest**](https://vitest.dev/) + [**Testing Library**](https://testing-library.com/) - unit/component tests
 - [**ESLint**](https://eslint.org/) (`eslint-config-next`)
@@ -45,3 +46,11 @@ src/
 public/images/    # Property, agent, and spotlight imagery
 docs/             # Design doc and ADRs
 ```
+
+## Credits
+
+Commenter avatars are generated with [DiceBear](https://www.dicebear.com/) using the **Notionists** style, seeded by each commenter's handle so avatars are deterministic and consistent everywhere they appear.
+
+- Style: **Notionists** by [Zoish](https://bio.link/heyzoish)
+- License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- Source: <https://heyzoish.gumroad.com/l/notionists>

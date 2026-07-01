@@ -14,6 +14,12 @@
   inset-inline: 0;
   bottom: 0;
   z-index: 20;
+  /* Fixed half-height panel regardless of how many comments the reel has - the
+     header stays pinned and the list flexes to fill the rest and scrolls. Half
+     of .screen (ReelStage), which has a definite height. */
+  height: 50%;
+  display: flex;
+  flex-direction: column;
   background: white;
   /* Rounds its own bottom corners (matching the screen's clip radius in
      ReelStage.module.css .screen) instead of relying solely on that ancestor
@@ -32,6 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
   padding: 4cqw 5.4cqw;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -54,8 +61,9 @@
 }
 
 .list {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  max-height: 62cqw;
   padding: 2.7cqw 5.4cqw 5.4cqw;
   display: flex;
   flex-direction: column;
@@ -78,13 +86,9 @@
   height: 9.5cqw;
   flex-shrink: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--warm-dark), var(--text));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 3.4cqw;
-  font-weight: 700;
+  object-fit: cover;
+  /* Shows through while the generated SVG paints and rounds the DiceBear tile. */
+  background: var(--warm-light, #f4e6d9);
 }
 
 .author {

@@ -24,6 +24,7 @@ export function ReelFeed({
   const [direction, setDirection] = useState<1 | -1>(1);
   const [isHovered, setIsHovered] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
+  const [feedTab, setFeedTab] = useState<"following" | "forYou">("forYou");
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartY = useRef<number | null>(null);
 
@@ -108,6 +109,30 @@ export function ReelFeed({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      {/* Stationary top chrome (a sibling of the sliding ReelCard, like the
+          dots) so it stays put while reels slide. Mock tabs, à la TikTok. */}
+      <div className={styles.topScrim} aria-hidden />
+      <div className={styles.tabs} role="tablist" aria-label="Reel feed">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={feedTab === "following"}
+          onClick={() => setFeedTab("following")}
+          className={`${styles.tab} ${feedTab === "following" ? styles.tabActive : ""}`}
+        >
+          Following
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={feedTab === "forYou"}
+          onClick={() => setFeedTab("forYou")}
+          className={`${styles.tab} ${feedTab === "forYou" ? styles.tabActive : ""}`}
+        >
+          For You
+        </button>
+      </div>
+
       <AnimatePresence initial={false} custom={direction}>
         <ReelCard
           key={currentProperty.slug}
@@ -119,7 +144,11 @@ export function ReelFeed({
         />
       </AnimatePresence>
 
-      <div className={styles.dots}>
+      {/* Hidden while the comment drawer is open: the dots live at the feed level
+          (a sibling of the animated ReelCard, whose transform forms a stacking
+          context), so they'd otherwise float above the drawer that renders inside
+          the card. The half-height sheet covers this bottom region anyway. */}
+      <div className={`${styles.dots} ${commentOpen ? styles.dotsHidden : ""}`}>
         {properties.map((property, i) => (
           <button
             key={property.slug}

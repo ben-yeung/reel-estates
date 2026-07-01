@@ -1,4 +1,5 @@
 import type { ReelComment } from "@/lib/types";
+import { commenterAvatar } from "@/lib/avatar";
 import styles from "./PropertyReviews.module.css";
 
 // The reel's comment thread, surfaced inside the property modal as social
@@ -23,7 +24,10 @@ export function PropertyReviews({ comments, likes }: { comments: ReelComment[]; 
         <div className={styles.list}>
           {comments.map((comment) => (
             <div key={`${comment.author}-${comment.text}`} className={styles.comment}>
-              <div className={styles.avatar}>{comment.author.replace("@", "")[0]?.toUpperCase() ?? "?"}</div>
+              {/* Same seed (the handle) as the reel's CommentDrawer, so a commenter
+                  keeps the identical generated avatar in both places. */}
+              {/* eslint-disable-next-line @next/next/no-img-element -- generated data-URI SVG avatar, not a remote asset */}
+              <img className={styles.avatar} src={commenterAvatar(comment.author)} alt="" />
               <div className={styles.bubble}>
                 <div className={styles.meta}>
                   <span className={styles.author}>{comment.author}</span>
