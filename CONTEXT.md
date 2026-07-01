@@ -44,6 +44,14 @@ _Avoid_: Contact form, Contact us, Lead-capture form (it is a booking flow, not 
 The single Agent shown by default on the general-enquiry path of a Consultation Booking, when no Property (and therefore no `agentSlug`) is selected.
 A real Agent from the roster, not a neutral brand placeholder - chosen as the highest-profile agent so a general enquirer still sees a credible person.
 
+**Card Carousel**:
+The mobile presentation (`<= 1024px`) of a collection - Featured Properties and Meet The Team - as a single, full-bleed, looping carousel showing one active card centred with its neighbours peeking in, navigated by swipe and windowed pagination dots. It replaces the desktop grid at that width. Locations is a Card Carousel at every width (via its own engine). See ADR 0009.
+_Avoid_: Slider, gallery, slideshow.
+
+**Nav Sheet**:
+The mobile navigation surface (`< 1024px`): a frosted panel that drops from the Navbar island when the hamburger is tapped, holding the nav links and the Book Consultation CTA. Not a separate-layer drawer - it expands from the bar itself.
+_Avoid_: Drawer, hamburger menu, mobile menu (as the noun for this surface).
+
 **Consultation Deep-Link**:
 A `?book=[slug]` query param, distinct from the modal's `?property=`, that pre-selects a Property (and its Agent) in the Consultation Booking on load.
 It is set by "Book a consultation" CTAs in the Property Detail Modal's agent sidebar and on Agent cards, making Consultation Booking the funnel floor for the whole site.
