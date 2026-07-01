@@ -1,7 +1,8 @@
 import { properties } from '@/data/properties'
 import { agents } from '@/data/agents'
 import { reels } from '@/data/reels'
-import type { Property, Agent, Reel, SEACountry } from './types'
+import { spotlights } from '@/data/spotlights'
+import type { Property, Agent, Reel, Spotlight, SEACountry } from './types'
 
 export function getPropertyBySlug(slug: string): Property | undefined {
   return properties.find(p => p.slug === slug)
@@ -41,4 +42,21 @@ export function formatViews(views: number): string {
   return String(views)
 }
 
-export { properties, agents, reels }
+// One decimal (unlike formatViews' whole-k rounding) so destination like totals
+// stay visually distinct - e.g. 48.2k vs 37.9k rather than both collapsing to a
+// rounded "k". Used for Spotlight engagement stats.
+export function formatLikes(likes: number): string {
+  if (likes >= 1_000_000) return `${(likes / 1_000_000).toFixed(1)}M`
+  if (likes >= 1_000) return `${(likes / 1_000).toFixed(1)}k`
+  return String(likes)
+}
+
+// Sum the reel likes of a Spotlight's explicit member Properties (ADR 0007).
+export function getSpotlightLikes(spotlight: Spotlight): number {
+  return spotlight.propertySlugs.reduce(
+    (sum, slug) => sum + (getPropertyReel(slug)?.likes ?? 0),
+    0,
+  )
+}
+
+export { properties, agents, reels, spotlights }

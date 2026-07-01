@@ -28,6 +28,17 @@ export interface Agent {
   socialLinks: { platform: 'instagram' | 'tiktok' | 'youtube'; url: string }[]
 }
 
+export interface Spotlight {
+  slug: string
+  title: string
+  country: SEACountry
+  description: string
+  image: string
+  /** Explicit member Properties whose Reel likes sum into this Spotlight's
+   *  engagement stat. Not derived from location.region - see docs/adr/0007. */
+  propertySlugs: string[]
+}
+
 export interface ReelComment {
   author: string
   text: string
