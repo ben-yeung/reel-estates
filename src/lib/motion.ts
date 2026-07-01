@@ -15,13 +15,37 @@ export const heroEntrance = {
   scrollHintPulse: { duration: 2, repeat: Infinity, delay: 1.8 } as Transition,
 };
 
+/** How long each featured property stays on screen before rotating. */
+export const heroRotateMs = 6500;
+
+/** Smooth editorial crossfade for each rotating hero background image - no
+ *  zoom, no pan. The image holds perfectly still; only the opacity fades as one
+ *  property gives way to the next. A slower fade reads as intentional and calm
+ *  rather than a slideshow cut. */
+export const heroBgLayer = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+  transition: {
+    opacity: { duration: 1.8, ease: "easeInOut" },
+  } as Transition,
+};
+
+/** Content swap for the featured-property card as it rotates. */
+export const heroFeaturedSwap = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+  transition: { duration: 0.5, ease: "easeOut" } as Transition,
+};
+
 export const navVariants: Variants = {
   top: {
-    top: "0px",
+    top: "0rem",
     left: "0%",
     right: "0%",
-    borderRadius: "0px",
-    height: "64px",
+    borderRadius: "0rem",
+    height: "4rem",
     backgroundColor: "rgba(255,255,255,0)",
     borderColor: "rgba(220,215,210,0)",
     boxShadow: "0 0px 0px rgba(0,0,0,0)",
@@ -37,11 +61,11 @@ export const navVariants: Variants = {
     },
   },
   island: {
-    top: "14px",
+    top: "0.875rem",
     left: "15%",
     right: "15%",
-    borderRadius: "14px",
-    height: "52px",
+    borderRadius: "0.875rem",
+    height: "3.25rem",
     backgroundColor: "rgba(255,255,255,0.52)",
     borderColor: "rgba(220,215,210,0.5)",
     boxShadow:

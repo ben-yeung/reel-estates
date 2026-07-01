@@ -11,6 +11,12 @@
   --font-heading: var(--font-montserrat), sans-serif;
   --font-body: var(--font-source-sans), sans-serif;
 
+  /* Global UI scale. One knob to grow/shrink the whole interface while keeping
+     every ratio fixed: it multiplies the fluid root font-size (globals.css), so
+     all rem-based sizing scales with it, and the title clamps multiply their px
+     floor + vw term by it so headings stay on the same scale. */
+  --scale: 1.5;
+
   /* Frosted glass recipe — shared blur/border/shadow.
      Background opacity varies by surface: navbar island uses --glass-bg (0.52),
      floating cards use --card-bg (0.88). */

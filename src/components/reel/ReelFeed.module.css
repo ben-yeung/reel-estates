@@ -7,17 +7,17 @@
 
 .dots {
   position: absolute;
-  bottom: 12px;
+  bottom: 0.75rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
   display: flex;
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .dot {
-  width: 4px;
-  height: 4px;
+  width: 0.25rem;
+  height: 0.25rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.4);
   border: none;
@@ -29,6 +29,6 @@
 }
 
 .dotActive {
-  width: 16px;
+  width: 1rem;
   background: white;
 }

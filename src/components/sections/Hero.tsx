@@ -1,26 +1,43 @@
 "use client";
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { StatChip } from "@/components/ui/StatChip";
 import { PropertyImage } from "@/components/ui/PropertyImage";
-import { getFeaturedProperties } from "@/lib/data-utils";
-import { kenBurns, heroEntrance } from "@/lib/motion";
+import { properties } from "@/lib/data-utils";
+import { heroEntrance, heroRotateMs, heroBgLayer, heroFeaturedSwap } from "@/lib/motion";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const featured = getFeaturedProperties()[0];
+  const featuredList = properties;
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (featuredList.length <= 1) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % featuredList.length);
+    }, heroRotateMs);
+    return () => clearInterval(id);
+  }, [featuredList.length]);
+
+  const featured = featuredList[index];
 
   return (
     <section className={styles.hero}>
-      <motion.div
-        className={styles.bgWrapper}
-        initial={kenBurns.initial}
-        animate={kenBurns.animate}
-        transition={kenBurns.transition}
-      >
-        <PropertyImage src={featured.images[0]} alt={featured.name} className={styles.bgImage} priority />
+      <div className={styles.bgWrapper}>
+        <AnimatePresence>
+          <motion.div
+            key={featured.slug}
+            className={styles.bgLayer}
+            initial={heroBgLayer.initial}
+            animate={heroBgLayer.animate}
+            exit={heroBgLayer.exit}
+            transition={heroBgLayer.transition}
+          >
+            <PropertyImage src={featured.images[0]} alt={featured.name} className={styles.bgImage} priority />
+          </motion.div>
+        </AnimatePresence>
         <div className={styles.scrim} />
-      </motion.div>
+      </div>
 
       <motion.div
         className={styles.textBlock}
@@ -34,7 +51,9 @@ export default function Hero() {
           <span className={styles.titleBold}>Estates</span>
         </h1>
         <p className={styles.subtitle}>
-          Modern homes across Southeast Asia, discovered through the content you already love.
+          Modern homes across Southeast Asia,
+          <br />
+          in locations you would stop scrolling for.
         </p>
       </motion.div>
 
@@ -44,20 +63,27 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={heroEntrance.card}
       >
-        <Badge variant="warm" className={styles.featuredBadge}>
-          Featured Project
-        </Badge>
-        <p className={styles.featuredName}>{featured.name}</p>
-        <p className={styles.featuredLocation}>
-          {featured.location.city}, {featured.location.region}, {featured.location.country}
-        </p>
-        <div className={styles.statRow}>
-          <StatChip icon="bed" value={featured.beds} tone="light" />
-          <span className={styles.statDivider}>|</span>
-          <StatChip icon="bath" value={featured.baths} tone="light" />
-          <span className={styles.statDivider}>|</span>
-          <StatChip icon="sqft" value={`${featured.sqft.toLocaleString()} sqft`} tone="light" />
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={featured.slug}
+            initial={heroFeaturedSwap.initial}
+            animate={heroFeaturedSwap.animate}
+            exit={heroFeaturedSwap.exit}
+            transition={heroFeaturedSwap.transition}
+          >
+            <p className={styles.featuredName}>{featured.name}</p>
+            <p className={styles.featuredLocation}>
+              {featured.location.city}, {featured.location.region}, {featured.location.country}
+            </p>
+            <div className={styles.statRow}>
+              <StatChip icon="bed" value={featured.beds} tone="light" />
+              <span className={styles.statDivider}>|</span>
+              <StatChip icon="bath" value={featured.baths} tone="light" />
+              <span className={styles.statDivider}>|</span>
+              <StatChip icon="sqft" value={`${featured.sqft.toLocaleString()} sqft`} tone="light" />
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
 
       <motion.div
