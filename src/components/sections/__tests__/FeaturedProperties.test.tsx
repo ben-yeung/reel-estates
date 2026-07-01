@@ -53,4 +53,14 @@ describe("FeaturedProperties", () => {
 
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
+
+  it("swaps ?property= for ?book= when the modal's Book Consultation CTA is clicked", async () => {
+    const user = userEvent.setup();
+    searchParamsRef.current = new URLSearchParams(`property=${properties[0].slug}`);
+    render(<FeaturedProperties />);
+
+    await user.click(screen.getByRole("button", { name: /book consultation/i }));
+
+    expect(pushMock).toHaveBeenCalledWith(`/?book=${properties[0].slug}`, { scroll: false });
+  });
 });

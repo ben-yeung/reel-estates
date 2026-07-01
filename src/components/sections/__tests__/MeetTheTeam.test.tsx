@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import MeetTheTeam from "../MeetTheTeam";
-import { agents } from "@/lib/data-utils";
+import { agents, properties } from "@/lib/data-utils";
 
 describe("MeetTheTeam", () => {
   it("renders a card for every agent, seniors first", () => {
@@ -35,7 +35,10 @@ describe("MeetTheTeam", () => {
     const card = screen
       .getByRole("heading", { level: 3, name: siriporn.name })
       .closest("article")!;
-    const links = within(card).getAllByRole("link");
+    // External social links only - the Consultation Booking CTA is internal.
+    const links = within(card)
+      .getAllByRole("link")
+      .filter((link) => link.getAttribute("target") === "_blank");
 
     expect(links).toHaveLength(siriporn.socialLinks.length);
     links.forEach((link, i) => {
@@ -44,8 +47,14 @@ describe("MeetTheTeam", () => {
     });
   });
 
-  it("renders no 'Book' contact CTA (deferred until the Consultation Booking exists)", () => {
+  it("gives each card a Book a consultation CTA deep-linking to one of the agent's properties", () => {
     render(<MeetTheTeam />);
-    expect(screen.queryByRole("button", { name: /book/i })).not.toBeInTheDocument();
+
+    agents.forEach((agent) => {
+      const card = screen.getByRole("heading", { level: 3, name: agent.name }).closest("article")!;
+      const cta = within(card).getByRole("link", { name: /book a consultation/i });
+      const slug = new URL(cta.getAttribute("href")!, "http://x").searchParams.get("book");
+      expect(properties.find((p) => p.slug === slug)?.agentSlug).toBe(agent.slug);
+    });
   });
 });

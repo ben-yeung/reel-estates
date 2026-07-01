@@ -157,3 +157,23 @@
   background: var(--warm);
   transform: translateY(-2px);
 }
+
+.cta {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 0.6rem;
+  background: var(--warm);
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cta:hover {
+  background: var(--warm-dark);
+}

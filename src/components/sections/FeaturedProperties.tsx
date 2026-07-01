@@ -32,6 +32,17 @@ function FeaturedPropertiesInner() {
     router.push(pathname, { scroll: false });
   }, [router, pathname]);
 
+  // "Book Consultation" from the modal: swap `?property=` for `?book=`, which
+  // closes the modal and pre-selects this property in the Consultation Booking.
+  // The section brings itself into view once the modal releases scroll lock.
+  // See docs/adr/0006.
+  const handleBook = useCallback(
+    (slug: string) => {
+      router.push(`${pathname}?book=${slug}`, { scroll: false });
+    },
+    [router, pathname]
+  );
+
   return (
     <section id="properties" className={styles.section}>
       <div className={styles.inner}>
@@ -63,7 +74,12 @@ function FeaturedPropertiesInner() {
 
       <AnimatePresence>
         {activeSlug && (
-          <PropertyDetailModal key="property-detail-modal" slug={activeSlug} onClose={handleClose} />
+          <PropertyDetailModal
+            key="property-detail-modal"
+            slug={activeSlug}
+            onClose={handleClose}
+            onBookConsultation={() => handleBook(activeSlug)}
+          />
         )}
       </AnimatePresence>
     </section>

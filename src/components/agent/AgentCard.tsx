@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { PropertyImage } from "@/components/ui/PropertyImage";
-import { formatViews } from "@/lib/data-utils";
+import { formatViews, properties } from "@/lib/data-utils";
 import type { Agent } from "@/lib/types";
 import styles from "./AgentCard.module.css";
 
@@ -10,6 +11,13 @@ const SOCIAL_LABEL: Record<Agent["socialLinks"][number]["platform"], string> = {
 };
 
 export function AgentCard({ agent }: { agent: Agent }) {
+  // Deep-link to the Consultation Booking (?book=) with one of this agent's
+  // properties preselected, so the booking opens with this agent auto-filled.
+  // Prefer a featured property; fall back to any of theirs. See docs/adr/0006.
+  const bookProperty =
+    properties.find((p) => p.featured && p.agentSlug === agent.slug) ??
+    properties.find((p) => p.agentSlug === agent.slug);
+
   return (
     <article className={styles.card}>
       <div className={styles.photo}>
@@ -54,6 +62,17 @@ export function AgentCard({ agent }: { agent: Agent }) {
             </a>
           ))}
         </div>
+
+        {bookProperty && (
+          <Link
+            href={`/?book=${bookProperty.slug}`}
+            scroll={false}
+            className={styles.cta}
+            aria-label={`Book a consultation with ${agent.name}`}
+          >
+            Book a consultation
+          </Link>
+        )}
       </div>
     </article>
   );

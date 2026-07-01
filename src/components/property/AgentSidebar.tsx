@@ -5,9 +5,11 @@ import styles from "./AgentSidebar.module.css";
 export function AgentSidebar({
   agent,
   formattedPrice,
+  onBookConsultation,
 }: {
   agent: Agent;
   formattedPrice: string;
+  onBookConsultation?: () => void;
 }) {
   return (
     <div className={styles.sidebar}>
@@ -24,9 +26,9 @@ export function AgentSidebar({
       <p className={styles.phoneLabel}>Or call for consultation</p>
       <p className={styles.phone}>{agent.phone}</p>
 
-      {/* Decorative for v1: the Contact section is still a placeholder, so this
-          CTA has no destination yet. See docs/adr/0003. */}
-      <button type="button" className={styles.cta}>
+      {/* Deep-links to the Consultation Booking with this property preselected
+          (?book=), closing the modal on the way. See docs/adr/0006. */}
+      <button type="button" className={styles.cta} onClick={onBookConsultation}>
         Book Consultation
       </button>
     </div>
