@@ -60,11 +60,11 @@ export function PropertyCard({
         </p>
         <p className={styles.price}>{formatPrice(property.price)}</p>
         <div className={styles.statRow} data-testid="property-specs">
-          <StatChip icon="bed" value={property.beds} />
+          <StatChip icon="bed" value={property.beds} label={property.beds === 1 ? "Bed" : "Beds"} />
           <span className={styles.statDivider}>|</span>
-          <StatChip icon="bath" value={property.baths} />
+          <StatChip icon="bath" value={property.baths} label={property.baths === 1 ? "Bath" : "Baths"} />
           <span className={styles.statDivider}>|</span>
-          <StatChip icon="sqft" value={property.sqft.toLocaleString()} />
+          <StatChip icon="sqft" value={property.sqft.toLocaleString()} label="sqft" />
         </div>
       </div>
     </motion.button>

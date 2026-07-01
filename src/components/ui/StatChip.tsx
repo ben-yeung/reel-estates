@@ -26,16 +26,19 @@ const icons = {
 export function StatChip({
   icon,
   value,
+  label,
   tone = "muted",
 }: {
   icon: "bed" | "bath" | "sqft";
   value: number | string;
+  label?: string;
   tone?: "muted" | "light";
 }) {
   return (
     <span className={`${styles.chip} ${tone === "light" ? styles.light : ""}`}>
       <span className={styles.icon}>{icons[icon]}</span>
       <span>{value}</span>
+      {label && <span className={styles.label}>{label}</span>}
     </span>
   );
 }
