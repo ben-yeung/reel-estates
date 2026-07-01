@@ -12,6 +12,10 @@ export const TIME_SLOTS = ["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM", "5:00 PM
 
 export const WEEKDAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"] as const;
 
+// How long the inline confirmation lingers before the panel resets to a fresh
+// calendar. Mock flow, so the reset is purely a UX convenience.
+export const CONFIRMATION_RESET_MS = 10_000;
+
 export function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }

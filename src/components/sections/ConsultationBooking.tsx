@@ -62,11 +62,7 @@ function ConsultationBookingInner() {
           </div>
           <div className={styles.right}>
             {agent && (
-              <BookingPanel
-                agent={agent}
-                propertyName={property?.name ?? null}
-                selectionKey={selectedSlug ?? "__general__"}
-              />
+              <BookingPanel agent={agent} selectionKey={selectedSlug ?? "__general__"} />
             )}
           </div>
         </div>
