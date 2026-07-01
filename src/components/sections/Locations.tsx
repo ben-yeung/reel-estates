@@ -23,121 +23,81 @@ const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 const SPRING = { type: "spring", stiffness: 260, damping: 32 } as const;
-
 const N = spotlights.length;
-// The track renders the destinations three times so there is always a card on
-// each side of the centered one. We live in the middle copy [N, 2N) and rebase
-// back into it after every settle, which makes the loop seamless in both
-// directions - the copies are identical, so the rebase is pixel-invisible.
-const COPIES = 3;
-const RENDERED = Array.from({ length: COPIES * N }, (_, i) => ({
-  spot: spotlights[i % N],
-  physical: i,
-  key: `${spotlights[i % N].slug}-${Math.floor(i / N)}`,
-}));
+// Cards rendered on each side of the centre one. Only these mount; the loop is
+// achieved by an UNBOUNDED index and a sliding window - no copies, no rebase,
+// so nothing can feed back on itself. The buffer must exceed the widest peek.
+const W = 4;
+// Gap between cards as a fraction of card width (kept proportional so it scales
+// with the fluid card size). step = card width + gap.
+const GAP_RATIO = 0.04;
 
 export default function Locations() {
-  // `active` is a physical index into RENDERED; the real destination is active % N.
-  const [active, setActive] = useState(N);
-  const activeRef = useRef(N);
+  // `index` is unbounded; the real destination is ((index % N) + N) % N. It only
+  // ever changes by an explicit user action - there is no self-triggering rebase.
+  const [index, setIndex] = useState(0);
+  const indexRef = useRef(0);
   const reduce = useReducedMotion();
   const x = useMotionValue(0);
+  const [step, setStep] = useState(0);
 
   const viewportRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  // Measured geometry: card width, step (card + gap), viewport width - read from
-  // the DOM so it stays correct across the responsive clamp() sizing.
+  const activeCardRef = useRef<HTMLDivElement>(null);
   const metrics = useRef({ step: 0, cardW: 0, vpW: 0 });
 
-  const setActiveIndex = useCallback((index: number) => {
-    activeRef.current = index;
-    setActive(index);
+  const targetX = useCallback((i: number) => {
+    const { step: s, cardW, vpW } = metrics.current;
+    return vpW / 2 - cardW / 2 - i * s;
   }, []);
 
-  const targetX = useCallback((index: number) => {
-    const { step, cardW, vpW } = metrics.current;
-    return vpW / 2 - cardW / 2 - index * step;
+  const setIdx = useCallback((i: number) => {
+    indexRef.current = i;
+    setIndex(i);
   }, []);
 
   const measure = useCallback(() => {
     const vp = viewportRef.current;
-    const first = cardRefs.current[0];
-    const second = cardRefs.current[1];
-    if (!vp || !first) return;
-    const cardW = first.offsetWidth;
-    const step = second ? second.offsetLeft - first.offsetLeft : cardW;
-    const vpW = vp.offsetWidth;
-    metrics.current = { step, cardW, vpW };
+    const card = activeCardRef.current;
+    if (!vp || !card) return;
+    const cardW = card.offsetWidth;
+    const s = cardW * (1 + GAP_RATIO);
+    metrics.current = { step: s, cardW, vpW: vp.offsetWidth };
+    setStep(s);
   }, []);
 
-  // Snap `active` back into the middle copy [N, 2N) without moving any pixels:
-  // shifting both the index and x by a whole copy keeps identical content centered.
-  const normalize = useCallback(() => {
-    const { step } = metrics.current;
-    if (!step) return;
-    const v = activeRef.current;
-    const band = (((v - N) % N) + N) % N + N;
-    if (band !== v) {
-      x.set(x.get() - (band - v) * step);
-      setActiveIndex(band);
-    }
-  }, [setActiveIndex, x]);
-
-  // Move by ±1 (arrows / keys / swipe): normalize first so we stay bounded.
   const move = useCallback(
-    (delta: number) => {
-      normalize();
-      setActiveIndex(activeRef.current + delta);
-    },
-    [normalize, setActiveIndex],
-  );
-
-  // Jump to a real destination index by the shortest way around the ring.
-  const goToReal = useCallback(
-    (real: number) => {
-      normalize();
-      const current = activeRef.current - N;
-      let d = (((real - current) % N) + N) % N;
-      if (d > N / 2) d -= N;
-      setActiveIndex(activeRef.current + d);
-    },
-    [normalize, setActiveIndex],
+    (delta: number) => setIdx(indexRef.current + delta),
+    [setIdx],
   );
 
   // Position on mount before paint.
   useIsoLayoutEffect(() => {
     measure();
-    x.set(targetX(activeRef.current));
+    x.set(targetX(indexRef.current));
   }, [measure, targetX, x]);
 
-  // Re-measure and re-center on viewport resize (the card width is fluid).
+  // Re-measure and re-center on viewport resize (the card is fluid).
   useEffect(() => {
     function onResize() {
       measure();
-      x.set(targetX(activeRef.current));
+      x.set(targetX(indexRef.current));
     }
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [measure, targetX, x]);
 
-  // Spring the track to the active card whenever it changes, then rebase into
-  // the middle copy once the motion settles.
+  // Spring the track to the active card whenever the index changes. No onComplete
+  // work - the window handles the loop by mounting/unmounting off-screen cards.
   useEffect(() => {
-    const controls = animate(x, targetX(active), {
-      ...(reduce ? { duration: 0 } : SPRING),
-      onComplete: normalize,
-    });
+    const controls = animate(x, targetX(index), reduce ? { duration: 0 } : SPRING);
     return () => controls.stop();
-  }, [active, reduce, targetX, x, normalize]);
+  }, [index, reduce, targetX, x]);
 
-  // Clamp the live drag to ~1 card either side of the current card. Doing it
-  // here (rather than via framer's dragConstraints) means the motion value is
-  // never "out of bounds" after the fact, so the invisible rebase - which jumps
-  // x by a whole copy - is not fought/snapped back across the strip.
+  // Keep the live drag to ~1 card either side of centre so a swipe advances one.
   function handleDrag() {
     const { step: s } = metrics.current;
     if (!s) return;
-    const center = targetX(activeRef.current);
+    const center = targetX(indexRef.current);
     const max = 1.15 * s;
     const cur = x.get();
     if (cur > center + max) x.set(center + max);
@@ -147,11 +107,9 @@ export default function Locations() {
   function handleDragEnd(_event: unknown, info: PanInfo) {
     const { step: s } = metrics.current;
     if (!s) return;
-    // A swipe past ~1/5 of a card (or a decent flick) advances exactly one card;
-    // otherwise settle back to the current one.
     if (info.offset.x <= -s * 0.2 || info.velocity.x < -400) move(1);
     else if (info.offset.x >= s * 0.2 || info.velocity.x > 400) move(-1);
-    else animate(x, targetX(activeRef.current), reduce ? { duration: 0 } : SPRING);
+    else animate(x, targetX(indexRef.current), reduce ? { duration: 0 } : SPRING);
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
@@ -164,7 +122,12 @@ export default function Locations() {
     }
   }
 
-  const realActive = ((active % N) + N) % N;
+  // The sliding window of cards around the current index.
+  const windowCards = [];
+  for (let i = index - W; i <= index + W; i++) {
+    const real = ((i % N) + N) % N;
+    windowCards.push({ i, spot: spotlights[real] });
+  }
 
   return (
     <section
@@ -193,17 +156,16 @@ export default function Locations() {
           onDrag={handleDrag}
           onDragEnd={handleDragEnd}
         >
-          {RENDERED.map(({ spot, physical, key }) => {
-            const isActive = physical === active;
+          {windowCards.map(({ i, spot }) => {
+            const isActive = i === index;
             return (
               <div
-                key={key}
-                ref={(el) => {
-                  cardRefs.current[physical] = el;
-                }}
+                key={i}
+                ref={isActive ? activeCardRef : undefined}
                 className={`${styles.card} ${isActive ? styles.active : ""}`}
+                style={step ? { left: i * step } : undefined}
                 onClick={() => {
-                  if (!isActive) goToReal(physical % N);
+                  if (!isActive) move(i - index);
                 }}
                 role={isActive ? undefined : "button"}
                 tabIndex={isActive ? -1 : 0}
@@ -212,7 +174,7 @@ export default function Locations() {
                 onKeyDown={(e) => {
                   if (!isActive && (e.key === "Enter" || e.key === " ")) {
                     e.preventDefault();
-                    goToReal(physical % N);
+                    move(i - index);
                   }
                 }}
               >
@@ -244,12 +206,10 @@ export default function Locations() {
             );
           })}
         </motion.div>
-      </div>
 
-      <div className={styles.controls}>
         <button
           type="button"
-          className={styles.arrow}
+          className={`${styles.arrow} ${styles.arrowLeft}`}
           onClick={() => move(-1)}
           aria-label="Previous destination"
         >
@@ -257,24 +217,9 @@ export default function Locations() {
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
-
-        <div className={styles.dots} role="tablist" aria-label="Choose destination">
-          {spotlights.map((spot, i) => (
-            <button
-              key={spot.slug}
-              type="button"
-              role="tab"
-              aria-selected={i === realActive}
-              aria-label={spot.title}
-              className={`${styles.dot} ${i === realActive ? styles.dotActive : ""}`}
-              onClick={() => goToReal(i)}
-            />
-          ))}
-        </div>
-
         <button
           type="button"
-          className={styles.arrow}
+          className={`${styles.arrow} ${styles.arrowRight}`}
           onClick={() => move(1)}
           aria-label="Next destination"
         >

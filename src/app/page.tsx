@@ -4,7 +4,6 @@ import FeaturedProperties from "@/components/sections/FeaturedProperties";
 import Locations from "@/components/sections/Locations";
 import MeetTheTeam from "@/components/sections/MeetTheTeam";
 import ConsultationBooking from "@/components/sections/ConsultationBooking";
-import { SectionPlaceholder } from "@/components/sections/SectionPlaceholder";
 
 export default function Home() {
   return (
