@@ -36,26 +36,28 @@
 
 .closeButton {
   position: absolute;
-  top: 1.6vw;
-  right: 1.6vw;
+  /* Sits inside the panel's own 3vw padding gutter, clear of the agent
+     sidebar's content box below it. */
+  top: 1vw;
+  right: 1vw;
   z-index: 2;
-  width: 2.6vw;
-  height: 2.6vw;
+  width: 2vw;
+  height: 2vw;
   border-radius: 50%;
   border: none;
-  background: rgba(26, 26, 26, 0.06);
-  color: var(--text);
+  background: transparent;
+  color: var(--muted);
   font-size: 1.4vw;
   line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .closeButton:hover {
-  background: rgba(26, 26, 26, 0.12);
+  color: var(--text);
 }
 
 .body {
@@ -111,11 +113,13 @@
   }
 
   .closeButton {
-    top: 4vw;
-    right: 4vw;
-    width: 8vw;
-    height: 8vw;
-    font-size: 4vw;
+    /* offset + size stays within the panel's 5vw padding, same as desktop,
+       so it never overlaps the content below it. */
+    top: 1vw;
+    right: 1vw;
+    width: 4vw;
+    height: 4vw;
+    font-size: 3.2vw;
   }
 
   .body {
