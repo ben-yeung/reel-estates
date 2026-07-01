@@ -1,0 +1,55 @@
+{
+  "description": "Image generation prompts for destination scenery hero images used by the Locations section (Spotlights). Each entry maps to a spotlight in src/data/spotlights.ts. These sell the destination's scenery and sightseeing, NOT any specific property. Target output: landscape 3:2 scenic vista with the key subject centered so it survives a portrait crop on mobile. Save as /public/images/spotlights/<slug>.webp.",
+  "styleSuffix": "Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k",
+  "spotlights": [
+    {
+      "slug": "bali",
+      "title": "Bali",
+      "country": "Indonesia",
+      "filename": "public/images/spotlights/bali.webp",
+      "prompt": "Cinematic dawn vista over the sculpted Tegallalang rice terraces near Ubud, Bali, Indonesia. Concentric emerald paddies cascade down a steep jungle valley, each curved tier catching low golden backlight and mirrored in thin sheets of standing water. A single tall coconut palm rises in the mid-ground, wisps of morning mist drift through the ravine, and a moss-covered Balinese split gate (candi bentar) with a small stone offering shrine sits among tropical foliage to one side. Layered green hills and the distant silhouette of the Mount Agung volcano recede into soft dawn haze. Strong depth from foreground palm fronds to the far volcano, warm honeyed light raking across the terraces, serene yet dramatic, centered composition. Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    },
+    {
+      "slug": "el-nido",
+      "title": "El Nido",
+      "country": "Philippines",
+      "filename": "public/images/spotlights/el-nido.webp",
+      "prompt": "Dramatic scenery of El Nido, Palawan, Philippines, towering jagged limestone karst islands rising straight out of vivid turquoise water in Bacuit Bay, hidden lagoons and white-sand coves nestled between the cliffs, a lone wooden bangka outrigger boat gliding across the calm shallows, tropical greenery clinging to the rock faces, centered composition. Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    },
+    {
+      "slug": "nusa-penida",
+      "title": "Nusa Penida",
+      "country": "Indonesia",
+      "filename": "public/images/spotlights/nusa-penida.webp",
+      "prompt": "Iconic clifftop scenery of Nusa Penida, Indonesia, the sweeping Kelingking headland where sheer limestone cliffs plunge into a brilliant turquoise cove, a thin ribbon of white-sand beach far below, the open Indian Ocean stretching to the horizon under a warm late-afternoon sky, a rugged coastal footpath tracing the cliff edge, centered composition. Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    },
+    {
+      "slug": "siargao",
+      "title": "Siargao",
+      "country": "Philippines",
+      "filename": "public/images/spotlights/siargao.webp",
+      "prompt": "Lush tropical scenery of Siargao, Philippines, the famous Cloud 9 surf break with glassy peeling waves rolling toward a palm-lined shore, a long weathered wooden boardwalk pier reaching out over clear water, dense coconut-palm forest and a barefoot island path, a few surfers as tiny distant silhouettes in the lineup, centered composition. Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    },
+    {
+      "slug": "phuket",
+      "title": "Phuket",
+      "country": "Thailand",
+      "filename": "public/images/spotlights/phuket.webp",
+      "prompt": "Panoramic coastal scenery of southern Phuket, Thailand, rugged Andaman Sea cliffs above deep sapphire water, colorful longtail boats moored in a sheltered bay, the palm-fringed headland at Promthep Cape catching a golden sunset, distant islands scattered across the horizon, centered composition. Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    },
+    {
+      "slug": "krabi",
+      "title": "Krabi",
+      "country": "Thailand",
+      "filename": "public/images/spotlights/krabi.webp",
+      "prompt": "Cinematic scenery of Krabi, Thailand, colossal limestone karst towers rising from emerald-green water near Railay and Ao Nang, colorful longtail boats drifting in the shallows, jungle-topped cliffs mirrored on the calm sea, warm hazy tropical light, centered composition. Photorealistic travel destination photography, wide establishing vista, golden hour light, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    },
+    {
+      "slug": "hoi-an",
+      "title": "Hội An",
+      "country": "Vietnam",
+      "filename": "public/images/spotlights/hoi-an.webp",
+      "prompt": "Enchanting dusk scenery of Hội An Ancient Town, Vietnam, narrow lantern-lit lanes of golden-ochre heritage merchant houses, hundreds of glowing silk lanterns in red and gold strung overhead, small wooden boats carrying paper lanterns drifting on the Thu Bồn river, the historic Japanese covered bridge softly illuminated, warm reflections shimmering on the water, centered composition. Photorealistic travel destination photography, wide establishing vista, warm evening lantern glow, warm natural color grading, atmospheric depth, editorial travel-magazine quality, no people in the foreground, no text or watermarks, ultra-detailed, 8k"
+    }
+  ]
+}

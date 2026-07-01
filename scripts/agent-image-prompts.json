@@ -1,0 +1,33 @@
+{
+  "description": "Image generation prompts for agent avatar headshots. Each entry maps to an agent in src/data/agents.ts. Target output: square 1:1 portrait, save as /public/images/agents/<slug>.webp.",
+  "style": "Professional corporate real-estate agent headshot. Tight head-and-shoulders framing, face fills most of the frame, eyes on the upper third. Direct eye contact with camera, confident approachable expression, natural closed-mouth or soft smile. Soft flattering studio-style daylight, gentle key light, catchlights in the eyes, sharp focus on the face. Clean, softly out-of-focus neutral background with only a subtle hint of the region - the background must never compete with the subject. Realistic photographic skin texture, high-end LinkedIn / brochure quality. Square 1:1 crop.",
+  "negative_prompt": "full body, wide shot, environmental portrait, distant subject, small face, busy background, landscape scenery dominating frame, cartoon, illustration, 3d render, distorted face, extra fingers, text, watermark, logo, oversaturated, harsh flash, low resolution",
+  "framing_note": "Crop from just below the shoulders to just above the top of the head. The subject's face should occupy roughly 40-55% of the frame height. This is a headshot, not a scene - keep the camera close.",
+  "agents": [
+    {
+      "slug": "siriporn-thanawan",
+      "filename": "siriporn-thanawan.webp",
+      "prompt": "Tight professional headshot of Siriporn Thanawan, a poised Thai woman in her late 30s. Warm brown eyes making direct eye contact, elegant shoulder-length dark hair, subtle natural makeup, confident warm soft smile. Wearing a refined cream linen blazer over a silk top. Head-and-shoulders framing with the face filling most of the frame. Softly out-of-focus warm neutral background with only a faint suggestion of a sunlit Phuket villa terrace. Soft flattering daylight, catchlights in the eyes, sharp focus on the face, editorial corporate quality, square 1:1 crop."
+    },
+    {
+      "slug": "made-wijaya",
+      "filename": "made-wijaya.webp",
+      "prompt": "Tight professional headshot of Made Wijaya, a charismatic Balinese man in his early 40s. Warm tan skin, short dark hair, neatly trimmed beard, relaxed confident expression with direct eye contact. Wearing an open-collar linen shirt in a natural tone. Head-and-shoulders framing with the face filling most of the frame. Softly out-of-focus green neutral background hinting subtly at lush Bali foliage. Soft warm daylight, catchlights in the eyes, sharp focus on the face, cinematic corporate quality, square 1:1 crop."
+    },
+    {
+      "slug": "linh-nguyen",
+      "filename": "linh-nguyen.webp",
+      "prompt": "Tight professional headshot of Linh Nguyễn, a bright modern Vietnamese woman in her early 30s. Fair skin, long straight black hair, expressive dark eyes with direct eye contact, fresh natural makeup, optimistic soft smile. Wearing a tailored contemporary blazer. Head-and-shoulders framing with the face filling most of the frame. Softly out-of-focus warm neutral background with only a faint hint of dusk city light. Soft flattering daylight, catchlights in the eyes, sharp focus on the face, editorial corporate quality, square 1:1 crop."
+    },
+    {
+      "slug": "carlos-reyes",
+      "filename": "carlos-reyes.webp",
+      "prompt": "Tight professional headshot of Carlos Reyes, a friendly adventurous Filipino man in his mid 30s. Warm brown skin, short dark wavy hair, easy confident smile with direct eye contact. Wearing a light unstructured blazer over a white shirt. Head-and-shoulders framing with the face filling most of the frame. Softly out-of-focus bright neutral background with only a faint suggestion of tropical coastal light. Soft flattering daylight, catchlights in the eyes, sharp focus on the face, editorial corporate quality, square 1:1 crop."
+    },
+    {
+      "slug": "alex-hartmann",
+      "filename": "alex-hartmann.webp",
+      "prompt": "Tight professional headshot of Alex Hartmann, an urbane European expat man in his late 30s. Light skin, neatly styled light-brown hair, short stubble, thoughtful discerning expression with direct eye contact. Wearing a smart charcoal blazer over a fine-knit sweater. Head-and-shoulders framing with the face filling most of the frame. Softly out-of-focus cool neutral background with only a faint hint of forested hills. Soft cool morning daylight, catchlights in the eyes, sharp focus on the face, architectural editorial quality, square 1:1 crop."
+    }
+  ]
+}
