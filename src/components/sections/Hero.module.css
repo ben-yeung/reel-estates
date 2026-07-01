@@ -112,6 +112,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.875rem;
+  /* StatChip has no font-size of its own - it inherits, so this pins it to
+     the size it's always rendered at here. */
+  font-size: 0.8125rem;
 }
 
 .statDivider {

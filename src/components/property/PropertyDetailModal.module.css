@@ -1,0 +1,152 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 16, 12, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Every dimension and font-size below is viewport-width-relative (vw), not a
+   fixed px value or a clamp()-capped one - the panel is meant to keep scaling
+   proportionally as the viewport grows past ordinary desktop sizes and up
+   through 4K, rather than plateauing at a hardcoded maximum. The 860px
+   breakpoint below switches to a different (larger) vw rate rather than
+   capping, since a single vw rate can't read well at both phone and desktop
+   widths. */
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  margin: auto;
+  width: 85vw;
+  max-height: 88vh;
+  overflow-y: auto;
+  border-radius: 1.6vw;
+  padding: 3vw;
+  /* Solid, not glass: this panel carries dense reading content (description,
+     stats, agent details), so it stays opaque for legibility rather than
+     using the frosted-glass recipe the rest of the site uses for floating
+     cards over imagery. */
+  background: white;
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  outline: none;
+}
+
+.closeButton {
+  position: absolute;
+  /* Sits inside the panel's own 3vw padding gutter, clear of the agent
+     sidebar's content box below it. */
+  top: 1vw;
+  right: 1vw;
+  z-index: 2;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.4vw;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: var(--text);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 22vw;
+  gap: 2.4vw;
+  margin-top: 0.6vw;
+}
+
+.left {
+  min-width: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6vw;
+  margin: 1.2vw 0 0.9vw;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: 2vw;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5vw;
+}
+
+.location {
+  font-size: 1vw;
+  color: var(--muted);
+  margin-bottom: 1.2vw;
+}
+
+.description {
+  font-size: 1.05vw;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vw;
+}
+
+@media (max-width: 860px) {
+  .panel {
+    width: calc(100vw - 24px);
+    max-height: 92vh;
+    padding: 5vw;
+    border-radius: 4vw;
+  }
+
+  .closeButton {
+    /* offset + size stays within the panel's 5vw padding, same as desktop,
+       so it never overlaps the content below it. */
+    top: 1vw;
+    right: 1vw;
+    width: 4vw;
+    height: 4vw;
+    font-size: 3.2vw;
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+    gap: 5vw;
+  }
+
+  .tags {
+    gap: 1.8vw;
+    margin: 3vw 0 2.4vw;
+  }
+
+  .name {
+    font-size: 5.6vw;
+    margin-bottom: 1.4vw;
+  }
+
+  .location {
+    font-size: 3.4vw;
+    margin-bottom: 3vw;
+  }
+
+  .description {
+    font-size: 3.6vw;
+  }
+
+  .right {
+    gap: 3vw;
+  }
+}
