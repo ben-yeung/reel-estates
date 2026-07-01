@@ -15,9 +15,11 @@ const FOCUSABLE_SELECTOR =
 export function PropertyDetailModal({
   slug,
   onClose,
+  onBookConsultation,
 }: {
   slug: string;
   onClose: () => void;
+  onBookConsultation?: () => void;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
@@ -43,7 +45,9 @@ export function PropertyDetailModal({
     panelRef.current?.focus();
     return () => {
       document.body.style.overflow = "";
-      previouslyFocusedRef.current?.focus();
+      // preventScroll so restoring focus doesn't yank the page back up - e.g.
+      // when closing to deep-link into the Consultation Booking below.
+      previouslyFocusedRef.current?.focus({ preventScroll: true });
     };
   }, []);
 
@@ -113,7 +117,11 @@ export function PropertyDetailModal({
             <p className={styles.description}>{property.description}</p>
           </div>
           <div className={styles.right}>
-            <AgentSidebar agent={agent} formattedPrice={formatPrice(property.price)} />
+            <AgentSidebar
+              agent={agent}
+              formattedPrice={formatPrice(property.price)}
+              onBookConsultation={onBookConsultation}
+            />
             <PropertyStats beds={property.beds} baths={property.baths} sqft={property.sqft} />
             {reel && reel.comments.length > 0 && (
               <PropertyReviews comments={reel.comments} likes={reel.likes} />

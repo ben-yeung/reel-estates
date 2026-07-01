@@ -14,3 +14,7 @@ class IntersectionObserverMock {
 
 // jsdom has no IntersectionObserver; framer-motion's whileInView needs one to exist.
 window.IntersectionObserver = IntersectionObserverMock as unknown as typeof IntersectionObserver;
+
+// jsdom doesn't implement scrollIntoView; the Consultation Booking calls it when
+// a ?book= deep link arrives. Stub it to a no-op so tests don't log jsdom errors.
+Element.prototype.scrollIntoView = () => {};

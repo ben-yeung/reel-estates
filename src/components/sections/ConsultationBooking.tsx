@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { PropertySelector } from "@/components/consultation/PropertySelector";
@@ -30,13 +30,31 @@ function ConsultationBookingInner() {
     }
   }
 
+  // When a `?book=` deep link arrives (external link, or the modal's "Book
+  // Consultation" CTA), bring the section into view. An open Property Detail
+  // Modal locks body scroll, so wait until the page is scrollable again.
+  const sectionRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!bookParam || !getPropertyBySlug(bookParam)) return;
+    let raf = 0;
+    const bringIntoView = () => {
+      if (document.body.style.overflow === "hidden") {
+        raf = requestAnimationFrame(bringIntoView);
+        return;
+      }
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    raf = requestAnimationFrame(bringIntoView);
+    return () => cancelAnimationFrame(raf);
+  }, [bookParam]);
+
   const property = selectedSlug ? getPropertyBySlug(selectedSlug) ?? null : null;
   // Agent auto-fills from the property; the general-enquiry path falls back to
   // the Lead Agent so every path shows a real person. See docs/adr/0005.
   const agent = getAgentBySlug(property?.agentSlug ?? LEAD_AGENT_SLUG);
 
   return (
-    <section id="contact" className={styles.section}>
+    <section id="contact" ref={sectionRef} className={styles.section}>
       <div className={styles.inner}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
