@@ -69,6 +69,12 @@
   background: var(--warm-dark);
 }
 
+/* The CTA carries both labels; only one shows at a time (see the tight-nav
+   breakpoint below). "Book" is hidden until the nav runs out of room. */
+.ctaLabelShort {
+  display: none;
+}
+
 /* ---- Mobile: hamburger + Nav Sheet ---- */
 
 .hamburger {
@@ -174,6 +180,24 @@
 
 .sheetCta:hover {
   background: var(--warm-dark);
+}
+
+/* Tight desktop zone: above the 1024px hamburger breakpoint but narrow enough
+   that the scrolled "island" nav (70% viewport width) can no longer fit the
+   brand wordmark and the full CTA label alongside the links. Drop the wordmark
+   and shorten "Book Consultation" to "Book" so nothing wraps or clips. */
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .logoText {
+    display: none;
+  }
+
+  .ctaLabelFull {
+    display: none;
+  }
+
+  .ctaLabelShort {
+    display: inline;
+  }
 }
 
 @media (max-width: 1024px) {

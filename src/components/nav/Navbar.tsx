@@ -100,7 +100,8 @@ export default function Navbar() {
           ))}
           <li>
             <Link href="/#contact" className={styles.cta}>
-              Book Consultation
+              <span className={styles.ctaLabelFull}>Book Consultation</span>
+              <span className={styles.ctaLabelShort}>Book</span>
             </Link>
           </li>
         </ul>
