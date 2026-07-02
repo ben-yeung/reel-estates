@@ -46,8 +46,8 @@
   color: rgba(26, 26, 26, 0.72);
 }
 
-/* Desktop-only listing-alerts capture. Two rows sized to sit within the brand
-   block's height so the footer stays as short as the brand-only layout. */
+/* Listing-alerts capture. Two rows sized to sit within the brand block's
+   height so the footer stays as short as the brand-only layout on desktop. */
 .newsletter {
   display: flex;
   flex-direction: column;
@@ -178,26 +178,62 @@
   opacity: 0.65;
 }
 
-/* Desktop-only: below 860px the right-side capture is dropped and the footer
-   reverts to the brand-only layout. */
+/* Tablet and mobile: the brand block and listing-alerts capture stack into a
+   single centered column, and the capture itself stacks (heading, socials,
+   form) center-aligned. */
 @media (max-width: 860px) {
-  .newsletter {
-    display: none;
-  }
-}
-
-@media (max-width: 640px) {
   .inner {
-    padding: 1.125rem 1.25rem 1.125rem;
+    padding: 1.5rem 1.5rem 1.25rem;
     text-align: center;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
   }
 
   .brand {
     align-items: center;
   }
 
+  .tagline {
+    max-width: none;
+  }
+
+  .newsletter {
+    align-items: center;
+    width: 100%;
+    max-width: 24rem;
+    gap: 1rem;
+  }
+
+  /* Keep the heading and social icons inline as a centered row. */
+  .newsletterTop {
+    justify-content: center;
+    gap: 0.875rem;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .emailInput {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+  }
+
+  /* Stack the AI notice above, with the copyright as the last row. */
   .bottomBar {
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
+    gap: 0.375rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 1.5rem 1.25rem 1.25rem;
   }
 }

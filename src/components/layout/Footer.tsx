@@ -33,7 +33,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Desktop-only listing-alerts capture; hidden below 860px. */}
+          {/* Listing-alerts capture; a row on desktop, centered stack on mobile. */}
           <div className={styles.newsletter}>
             <div className={styles.newsletterTop}>
               <h2 className={styles.newsletterHeading}>New reels, in your inbox</h2>
